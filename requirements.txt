@@ -1,0 +1,14 @@
+mysql-connector-python
+pandas
+python-dotenv
+matplotlib
+seaborn
+SQLAlchemy
+pyarrow
+scikit-learn
+imbalanced-learn
+fastparquet
+joblib
+scipy
+xgboost
+numpy

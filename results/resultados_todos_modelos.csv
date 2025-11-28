@@ -1,0 +1,47 @@
+modelo,tipo,mae,rmse,r2,mejores_params,sugerencias,model_obj,delito,accuracy,precision,recall,f1
+random_forest,regresion,0.1527064336900066,0.6786521693184835,0.9399210225408404,,"['RMSE >> MAE: Hay outliers, considera robustificar', 'R2 muy alto: Verifica no haya overfitting']","RandomForestRegressor(n_jobs=-1, random_state=42)",hurto,,,,
+gradient_boosting,regresion,0.15703123817702058,0.6282066386642234,0.9485206455541494,,"['RMSE >> MAE: Hay outliers, considera robustificar', 'R2 muy alto: Verifica no haya overfitting']",GradientBoostingRegressor(random_state=42),hurto,,,,
+extra_trees,regresion,0.15292318470768626,0.7038724184194823,0.9353727101594655,,"['RMSE >> MAE: Hay outliers, considera robustificar', 'R2 muy alto: Verifica no haya overfitting']","ExtraTreesRegressor(n_jobs=-1, random_state=42)",hurto,,,,
+knn,regresion,0.15828190170217563,0.6627579055513096,0.9427022085042114,,"['RMSE >> MAE: Hay outliers, considera robustificar', 'R2 muy alto: Verifica no haya overfitting']",KNeighborsRegressor(n_neighbors=10),hurto,,,,
+adaboost,regresion,0.49033220014110573,1.1474219700153918,0.8282588481074518,,"['RMSE >> MAE: Hay outliers, considera robustificar']","AdaBoostRegressor(n_estimators=100, random_state=42)",hurto,,,,
+xgboost,regresion,0.15509334206581116,0.6623529081978071,0.9427722096443176,,"['RMSE >> MAE: Hay outliers, considera robustificar', 'R2 muy alto: Verifica no haya overfitting']","XGBRegressor(base_score=None, booster=None, callbacks=None,
+             colsample_bylevel=None, colsample_bynode=None,
+             colsample_bytree=None, device=None, early_stopping_rounds=None,
+             enable_categorical=False, eval_metric=None, feature_types=None,
+             feature_weights=None, gamma=None, grow_policy=None,
+             importance_type=None, interaction_constraints=None,
+             learning_rate=None, max_bin=None, max_cat_threshold=None,
+             max_cat_to_onehot=None, max_delta_step=None, max_depth=None,
+             max_leaves=None, min_child_weight=None, missing=nan,
+             monotone_constraints=None, multi_strategy=None, n_estimators=100,
+             n_jobs=-1, num_parallel_tree=None, ...)",hurto,,,,
+sgd,clasificacion,,,,,[],SGDClassifier(random_state=42),hurto,0.9216830120617743,0.910303825151469,0.9216830120617743,0.9124913500528138
+logistic,clasificacion,,,,,[],"LogisticRegression(max_iter=1000, random_state=42)",hurto,0.9743616841393304,0.9744206108219513,0.9743616841393304,0.9743538542553645
+random_forest,clasificacion,,,,,[],"RandomForestClassifier(n_jobs=-1, random_state=42)",hurto,0.9771305377071356,0.9768252769310743,0.9771305377071356,0.976936848081811
+gradient_boosting,clasificacion,,,,,[],GradientBoostingClassifier(random_state=42),hurto,0.9772221282831699,0.9769665545376272,0.9772221282831699,0.9770606595287804
+knn,clasificacion,,,,,[],KNeighborsClassifier(n_neighbors=10),hurto,0.9744250929996618,0.973889687747962,0.9744250929996618,0.9740351532338009
+decision_tree,clasificacion,,,,,[],"DecisionTreeClassifier(max_depth=20, random_state=42)",hurto,0.9770248562732499,0.9767154524004468,0.9770248562732499,0.9768275902771016
+adaboost,clasificacion,,,,,[],"AdaBoostClassifier(n_estimators=100, random_state=42)",hurto,0.9765739488220043,0.9765707120456404,0.9765739488220043,0.9765723056340495
+random_forest,regresion,0.14701992637155614,0.5996702187727989,0.8938648104941883,,"['RMSE >> MAE: Hay outliers, considera robustificar']","RandomForestRegressor(n_jobs=-1, random_state=42)",extorsion,,,,
+gradient_boosting,regresion,0.14198709176341223,0.5582807432426095,0.9080101875534095,,"['RMSE >> MAE: Hay outliers, considera robustificar', 'R2 muy alto: Verifica no haya overfitting']",GradientBoostingRegressor(random_state=42),extorsion,,,,
+extra_trees,regresion,0.14668501673824705,0.6036227442281299,0.8924610904872167,,"['RMSE >> MAE: Hay outliers, considera robustificar']","ExtraTreesRegressor(n_jobs=-1, random_state=42)",extorsion,,,,
+knn,regresion,0.1890927624872579,0.603700785260681,0.8924332817601983,,"['RMSE >> MAE: Hay outliers, considera robustificar']",KNeighborsRegressor(n_neighbors=10),extorsion,,,,
+adaboost,regresion,0.26197069156574887,0.6504218367266044,0.875139616547046,,"['RMSE >> MAE: Hay outliers, considera robustificar']","AdaBoostRegressor(n_estimators=100, random_state=42)",extorsion,,,,
+xgboost,regresion,0.14557285606861115,0.575253132373516,0.9023319482803345,,"['RMSE >> MAE: Hay outliers, considera robustificar', 'R2 muy alto: Verifica no haya overfitting']","XGBRegressor(base_score=None, booster=None, callbacks=None,
+             colsample_bylevel=None, colsample_bynode=None,
+             colsample_bytree=None, device=None, early_stopping_rounds=None,
+             enable_categorical=False, eval_metric=None, feature_types=None,
+             feature_weights=None, gamma=None, grow_policy=None,
+             importance_type=None, interaction_constraints=None,
+             learning_rate=None, max_bin=None, max_cat_threshold=None,
+             max_cat_to_onehot=None, max_delta_step=None, max_depth=None,
+             max_leaves=None, min_child_weight=None, missing=nan,
+             monotone_constraints=None, multi_strategy=None, n_estimators=100,
+             n_jobs=-1, num_parallel_tree=None, ...)",extorsion,,,,
+sgd,clasificacion,,,,,[],SGDClassifier(random_state=42),extorsion,0.904225743675285,0.9167642888301814,0.904225743675285,0.8827095899566303
+logistic,clasificacion,,,,,[],"LogisticRegression(max_iter=1000, random_state=42)",extorsion,0.9734964322120285,0.9734187054042835,0.9734964322120285,0.9734260320534612
+random_forest,clasificacion,,,,,[],"RandomForestClassifier(n_jobs=-1, random_state=42)",extorsion,0.9748401445649152,0.9746916488205795,0.9748401445649152,0.9747428433007808
+gradient_boosting,clasificacion,,,,,[],GradientBoostingClassifier(random_state=42),extorsion,0.97581317764804,0.9757919749150572,0.97581317764804,0.9758020120283343
+knn,clasificacion,,,,,[],KNeighborsClassifier(n_neighbors=10),extorsion,0.9696969696969697,0.9692802985368907,0.9696969696969697,0.9694454153954631
+decision_tree,clasificacion,,,,,[],"DecisionTreeClassifier(max_depth=20, random_state=42)",extorsion,0.9740524511166713,0.9738685235082785,0.9740524511166713,0.9738936094842823
+adaboost,clasificacion,,,,,[],"AdaBoostClassifier(n_estimators=100, random_state=42)",extorsion,0.9756741729218793,0.9756514160199146,0.9756741729218793,0.9756618115838175

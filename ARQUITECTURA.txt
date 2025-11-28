@@ -1,0 +1,137 @@
+ARQUITECTURA MODULAR DEL PROYECTO
+==================================
+
+ANTES: 1 archivo monolítico de 659 líneas
+DESPUÉS: 11 archivos modulares de ~1066 líneas (con mejor organización)
+
+DESGLOSE POR MÓDULOS:
+=====================
+
+1. config/config.py (~170 líneas)
+   - Todas las constantes y configuraciones
+   - Delitos a procesar
+   - Lista de modelos (regresión y clasificación)
+   - Hiperparámetros para cada modelo
+   - Configuración de features
+   - Parámetros de optimización
+
+2. utils/data_preparation.py (~150 líneas)
+   - Extracción de datos desde MySQL
+   - Creación de grid espacial
+   - Generación de features temporales
+   - Creación de lags
+   - Split train/test
+   - Escalado de features
+   - Pipeline completo de preparación
+
+3. utils/feature_engineering.py (~60 líneas)
+   - Funciones para crear features espaciales
+   - Generación de lags temporales
+   - Features estadísticas
+   - Transformaciones adicionales
+
+4. models/regression_models.py (~150 líneas)
+   - Instanciación de modelos de regresión
+   - Entrenamiento con/sin optimización
+   - Evaluación con métricas (MAE, RMSE, R²)
+   - Sugerencias de mejora automáticas
+
+5. models/classification_models.py (~150 líneas)
+   - Instanciación de modelos de clasificación
+   - Entrenamiento con/sin optimización
+   - Evaluación con métricas (Acc, Prec, Rec, F1)
+   - Sugerencias de mejora automáticas
+
+6. utils/model_evaluation.py (~130 líneas)
+   - Guardar mejores modelos (joblib)
+   - Generar resumen de resultados
+   - Mostrar top 5 modelos
+   - Mostrar sugerencias
+   - Guardar resultados en CSV
+   - Reporte de cumplimiento PC3
+
+7. ejecutar_todos_modelos.py (~140 líneas)
+   - Script principal simplificado
+   - Orquestación del pipeline
+   - Interfaz de usuario (CLI)
+   - Procesar múltiples delitos
+   - Generación de reportes finales
+
+8. models/common.py (~78 líneas)
+   - Conexión a base de datos MySQL
+   - Funciones auxiliares compartidas
+
+VENTAJAS DE ESTA ARQUITECTURA:
+===============================
+
+✅ MANTENIBILIDAD
+   - Cada archivo tiene una responsabilidad única
+   - Fácil encontrar y modificar código
+   - Reducción de acoplamiento
+
+✅ REUTILIZACIÓN
+   - Funciones pueden usarse en otros proyectos
+   - Modelos independientes entre sí
+   - Utilidades compartidas
+
+✅ TESTING
+   - Cada módulo puede testearse por separado
+   - Mock de dependencias más sencillo
+   - Unit tests más focalizados
+
+✅ ESCALABILIDAD
+   - Fácil añadir nuevos modelos
+   - Agregar nuevos tipos de features
+   - Extender evaluaciones
+
+✅ COLABORACIÓN
+   - Múltiples personas pueden trabajar sin conflictos
+   - Cambios localizados en archivos específicos
+   - Git diffs más legibles
+
+✅ CLARIDAD
+   - Estructura clara y organizada
+   - Imports explícitos
+   - Separación de concerns
+
+CÓMO EXTENDER EL PROYECTO:
+===========================
+
+Para añadir un nuevo modelo de regresión:
+1. Ir a models/regression_models.py
+2. Añadir el modelo en obtener_modelo_regresion()
+3. Añadir hiperparámetros en config/config.py
+4. Añadir nombre a MODELOS_REGRESION en config.py
+
+Para añadir nuevas features:
+1. Ir a utils/feature_engineering.py
+2. Crear función de transformación
+3. Llamar desde utils/data_preparation.py
+
+Para cambiar métricas de evaluación:
+1. Ir a utils/model_evaluation.py
+2. Modificar funciones de resumen
+3. Actualizar formato de salida
+
+FLUJO DE EJECUCIÓN:
+===================
+
+main()
+  ↓
+procesar_delito_completo(delito_key)
+  ↓
+preparar_datos_completo(delito_key)
+  ├── extraer_datos_delito()
+  ├── crear_grid_espacial()
+  ├── crear_features_temporales()
+  └── crear_features_lags()
+  ↓
+entrenar_modelo_regresion() × 6
+entrenar_modelo_clasificacion() × 7
+  ↓
+guardar_mejores_modelos()
+  ↓
+generar_resumen_resultados()
+mostrar_sugerencias()
+guardar_resultados_csv()
+mostrar_cumplimiento_pc3()
