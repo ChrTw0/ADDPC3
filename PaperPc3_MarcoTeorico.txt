@@ -1,0 +1,430 @@
+=============================================================================
+SECCIÓN: MARCO TEÓRICO / FUNDAMENTOS
+=============================================================================
+
+Esta sección explica conceptos básicos para que cualquier lector entienda el paper.
+Debe insertarse DESPUÉS de Introducción, ANTES de Metodología.
+
+=============================================================================
+
+## 2. MARCO TEÓRICO
+
+### 2.1. ¿Qué es Clasificación en Machine Learning?
+
+**Definición básica:**
+La clasificación es una técnica de aprendizaje supervisado donde el objetivo es predecir la **categoría o clase** a la que pertenece una observación, en lugar de predecir un número exacto [6].
+
+**Ejemplo cotidiano (Géron, Cap 3 [6]):**
+- **Regresión:** Predecir el precio exacto de una casa ($250,000)
+- **Clasificación:** Predecir si una casa es "Barata", "Normal" o "Cara"
+
+**Tipos de clasificación:**
+
+1. **Clasificación Binaria:** Solo 2 clases posibles
+   - Ejemplo del libro [6]: Detectar si un email es "Spam" o "No Spam"
+   - Ejemplo en este proyecto: Zona "Normal" vs "Crítica"
+
+2. **Clasificación Multiclase:** Más de 2 clases posibles
+   - Ejemplo del libro [6]: Reconocer dígitos (0-9)
+   - Ejemplo en este proyecto: Nivel de Riesgo "Bajo", "Medio", "Alto", "Muy Alto"
+
+**¿Por qué clasificar en lugar de predecir números exactos?**
+
+En el contexto de seguridad ciudadana:
+- ❌ **Predicción exacta:** "Habrá 23.7 hurtos la próxima semana" → Difícil de interpretar
+- ✅ **Clasificación:** "Esta zona es CRÍTICA" → **Decisión clara**: Enviar patrullas
+
+Como explica Géron [6]: "La clasificación transforma predicciones numéricas en decisiones accionables".
+
+---
+
+### 2.2. ¿Qué es un Modelo vs un Algoritmo?
+
+**Términos clave (siguiendo nomenclatura del libro [6]):**
+
+**Algoritmo de Machine Learning:**
+- Es el **método o proceso matemático** para aprender de los datos
+- Ejemplos: Gradient Boosting, Random Forest, Logistic Regression
+
+**Modelo:**
+- Es el **resultado de entrenar un algoritmo** con datos específicos
+- Contiene los parámetros aprendidos que permiten hacer predicciones
+
+**Analogía:**
+```
+Algoritmo = Receta de cocina
+Modelo = Plato cocinado usando esa receta
+```
+
+**Ejemplo en este proyecto:**
+- **Algoritmo:** Gradient Boosting (método general)
+- **Modelo:** "Gradient Boosting entrenado con 567,742 observaciones de HURTO en Lima"
+- **Predicción:** El modelo clasifica una nueva zona como "CRÍTICA"
+
+**En este paper:**
+- Implementamos **7 algoritmos** del Capítulo 3 [6]
+- Entrenamos **42 modelos** (7 algoritmos × 3 problemas × 2 delitos)
+- Cada modelo puede hacer predicciones sobre zonas de Lima
+
+---
+
+### 2.3. ¿Qué es un Hotspot Criminal?
+
+**Definición criminológica:**
+Un hotspot criminal es un **área geográfica específica** donde se concentra una cantidad desproporcionadamente alta de crímenes [3].
+
+**Teoría de concentración espacial (Eck et al. [3]):**
+- El crimen NO está distribuido uniformemente
+- Pequeñas áreas concentran la mayoría de crímenes
+- Ejemplo: 5% del territorio puede tener 50% de los crímenes [4]
+
+**Validación en nuestros datos (Lima):**
+- Top 5% de celdas concentra **56.2%** de todos los hurtos
+- Top 10% de celdas concentra **66.7%** de todos los hurtos
+- Índice de Gini = 0.771 (alta concentración espacial)
+
+**Representación técnica en este proyecto:**
+
+```
+Grid Espacial de Lima:
+┌─────┬─────┬─────┬─────┐
+│  2  │  1  │  0  │  3  │  ← Celdas de ~555m × 555m
+├─────┼─────┼─────┼─────┤
+│  0  │ 157 │  5  │  1  │  ← Número = crímenes por semana
+├─────┼─────┼─────┼─────┤
+│  1  │  8  │ 243 │  2  │
+├─────┼─────┼─────┼─────┤
+│  0  │  1  │  4  │  0  │
+└─────┴─────┴─────┴─────┘
+         ↑       ↑
+      HOTSPOTS (>100 crímenes)
+```
+
+**¿Por qué usar grid de 555m × 555m?**
+- Basado en literatura criminológica [4]: balance entre granularidad y suficiencia estadística
+- 555m ≈ 3 cuadras, escala operacional para patrullas policiales
+- Grid más pequeño → Datos insuficientes por celda
+- Grid más grande → Pierde precisión espacial
+
+---
+
+### 2.4. Finalidad de los Clasificadores: 3 Sistemas de Decisión
+
+Este proyecto NO construye UN modelo, sino **3 sistemas de clasificación complementarios**, cada uno respondiendo una pregunta operacional específica:
+
+#### **CLASIFICADOR 1: Nivel de Riesgo (4 clases)**
+
+**Pregunta que responde:**
+"¿Qué **cantidad de recursos** necesita esta zona?"
+
+**Clases y significado operacional:**
+- **Clase 0 (Bajo):** 0-2 crímenes/semana → Patrullaje rutinario estándar
+- **Clase 1 (Medio):** 3-5 crímenes/semana → Patrullaje intensificado (1.5x recursos)
+- **Clase 2 (Alto):** 6-10 crímenes/semana → Unidades especializadas (2x recursos)
+- **Clase 3 (Muy Alto):** >10 crímenes/semana → Operativo permanente (3x recursos)
+
+**Tipo:** Clasificación Multiclase (4 categorías)
+
+**Valor práctico:**
+Permite **asignación proporcional** de recursos. Una zona clasificada como "Alto" recibe el doble de patrullas que una "Bajo".
+
+**Ejemplo de uso:**
+```
+Input: Zona A tiene historial de 8 hurtos semana pasada
+Modelo predice: Clase 2 (Alto)
+Decisión: Asignar 4 patrullas (en lugar de 2 estándar)
+```
+
+---
+
+#### **CLASIFICADOR 2: Hotspot Crítico (2 clases - Binaria)**
+
+**Pregunta que responde:**
+"¿Debo **intervenir inmediatamente** en esta zona esta semana?"
+
+**Clases y significado operacional:**
+- **Clase 0 (Normal):** ≤5 crímenes/semana → Seguimiento normal
+- **Clase 1 (Crítico):** >5 crímenes/semana → **Intervención obligatoria**
+
+**Tipo:** Clasificación Binaria (sí/no)
+
+**Valor práctico:**
+Decisión **binaria clara** sin ambigüedad. Si el modelo predice "Crítico", se activa protocolo de intervención automáticamente.
+
+**Ejemplo de uso:**
+```
+Input: Zona B proyectada para próxima semana
+Modelo predice: Clase 1 (Crítico)
+Decisión: ✓ Activar operativo especial
+          ✓ Coordinar con comisaría local
+          ✓ Aumentar patrullaje nocturno
+```
+
+**Métricas críticas:**
+- **Precision alta:** Evitar falsas alarmas que desperdicien recursos
+- **Recall alto:** No perder zonas críticas reales que requieren intervención
+- **F1-Score = 0.9956:** De 100 zonas marcadas "Crítico", 99.5 realmente lo son
+
+---
+
+#### **CLASIFICADOR 3: Tendencia de Riesgo (3 clases)**
+
+**Pregunta que responde:**
+"¿Esta zona está **mejorando o empeorando**?"
+
+**Clases y significado operacional:**
+- **Clase 0 (Descenso):** Crímenes disminuyendo >30% vs promedio histórico
+  → Mantener estrategia actual (funciona)
+- **Clase 1 (Estable):** Variación entre -30% y +30%
+  → Monitoreo continuo
+- **Clase 2 (Escalada):** Crímenes aumentando >30% vs promedio histórico
+  → **Alerta temprana: intervenir ANTES de que se consolide como hotspot**
+
+**Tipo:** Clasificación Multiclase (3 categorías)
+
+**Valor práctico:**
+**Sistema de alerta temprana** que detecta zonas en deterioro ANTES de que se conviertan en hotspots críticos.
+
+**Ejemplo de uso:**
+```
+Input: Zona C historial últimas 4 semanas: [2, 3, 5, 8] hurtos
+      Promedio histórico: 3 hurtos/semana
+      Ratio: 8/3 = 2.67 (aumento 167%)
+Modelo predice: Clase 2 (Escalada)
+Decisión: ⚠️ Investigar causas (nueva banda criminal?, comercio ilegal?)
+          ⚠️ Intervención preventiva para evitar consolidación
+```
+
+---
+
+### 2.5. Arquitectura del Sistema Completo
+
+**Pipeline operacional:**
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│ 1. DATOS DE ENTRADA (Semanal)                                      │
+│    - Denuncias georreferenciadas PNP                               │
+│    - Grid de Lima dividido en celdas 555m × 555m                   │
+│    - Histórico últimas 4 semanas por celda                         │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 2. FEATURE ENGINEERING                                             │
+│    - crime_count_lag_1: Crímenes semana anterior                   │
+│    - crime_count_lag_2: Crímenes 2 semanas atrás                   │
+│    - crime_count_lag_3: Crímenes 3 semanas atrás                   │
+│    - crime_count_lag_4: Crímenes 4 semanas atrás                   │
+│    - mes: Estacionalidad (1-12)                                    │
+│    - dia_semana: Patrón semanal (0-6)                              │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 3. CLASIFICADORES ENTRENADOS (Mejores modelos)                     │
+│                                                                     │
+│  ┌──────────────────────┐  ┌─────────────────────┐                │
+│  │ Gradient Boosting    │  │ Gradient Boosting   │                │
+│  │ Nivel de Riesgo      │  │ Hotspot Crítico     │                │
+│  │ F1 = 0.9771          │  │ F1 = 0.9956         │                │
+│  └──────────┬───────────┘  └──────────┬──────────┘                │
+│             │                          │                           │
+│             ▼                          ▼                           │
+│      [ Bajo / Medio /          [ Normal / Crítico ]               │
+│        Alto / Muy Alto ]                                           │
+│                                                                     │
+│  ┌──────────────────────┐                                          │
+│  │ Random Forest        │                                          │
+│  │ Tendencia            │                                          │
+│  │ F1 = 0.9327          │                                          │
+│  └──────────┬───────────┘                                          │
+│             │                                                       │
+│             ▼                                                       │
+│      [ Descenso / Estable / Escalada ]                             │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 4. SISTEMA DE DECISIÓN OPERACIONAL                                 │
+│                                                                     │
+│  Para cada celda de Lima (ejemplo: Celda X):                       │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────┐           │
+│  │ INPUT: Celda X con lags [8, 6, 5, 4]               │           │
+│  └────────────────────┬────────────────────────────────┘           │
+│                       │                                            │
+│                       ▼                                            │
+│  ┌─────────────────────────────────────────────────────┐           │
+│  │ PREDICCIONES:                                       │           │
+│  │  - Nivel Riesgo:    Alto (6-10 crímenes)           │           │
+│  │  - Hotspot Crítico: Normal (≤5 crímenes)           │           │
+│  │  - Tendencia:       Descenso (mejorando)           │           │
+│  └────────────────────┬────────────────────────────────┘           │
+│                       │                                            │
+│                       ▼                                            │
+│  ┌─────────────────────────────────────────────────────┐           │
+│  │ DECISIONES AUTOMATIZADAS:                           │           │
+│  │  ✓ Asignar 2x recursos (Alto)                      │           │
+│  │  ✓ NO activar operativo especial (Normal)          │           │
+│  │  ✓ Mantener estrategia actual (Descenso funciona)  │           │
+│  └─────────────────────────────────────────────────────┘           │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+**Integración operacional:**
+
+Los 3 clasificadores trabajan **en conjunto** para generar un **perfil completo** de cada zona:
+
+| Celda | Nivel Riesgo | Hotspot | Tendencia | Acción Recomendada |
+|-------|--------------|---------|-----------|-------------------|
+| A | Muy Alto | Crítico | Escalada | 🚨 **URGENTE**: Operativo inmediato, investigar causas escalada |
+| B | Alto | Normal | Estable | ⚠️ Patrullaje intensificado, monitoreo continuo |
+| C | Medio | Normal | Descenso | ✓ Patrullaje estándar, estrategia funcionando |
+| D | Bajo | Normal | Descenso | ✓ Seguimiento rutinario |
+
+---
+
+### 2.6. ¿Por qué 7 Algoritmos Diferentes?
+
+**Objetivo académico (Capítulo 3 [6]):**
+Comparar empíricamente múltiples algoritmos de clasificación para identificar cuál tiene mejor rendimiento en este problema específico.
+
+**Algoritmos implementados (todos del Cap 3):**
+
+1. **SGD Classifier:** Clasificador lineal con descenso de gradiente estocástico
+2. **Logistic Regression:** Clasificador probabilístico, salida interpretable
+3. **Random Forest:** Ensemble de árboles (bagging), robusto a overfitting
+4. **Gradient Boosting:** Ensemble secuencial, típicamente mejor rendimiento
+5. **K-Nearest Neighbors (KNN):** Clasificación por vecindad, captura patrones espaciales
+6. **Decision Tree:** Árbol individual, altamente interpretable
+7. **AdaBoost:** Boosting adaptativo, enfoque en casos difíciles
+
+**Hallazgo del estudio:**
+- **Gradient Boosting** ganó en 4/6 categorías (67% de casos)
+- **Random Forest** superó a GB solo en clasificación de Tendencia
+- **Logistic Regression** tuvo rendimiento casi igual a GB (F1 diff = 0.0002) pero con ventaja de interpretabilidad
+
+**Conclusión práctica:**
+Para despliegue operacional, recomendamos:
+- **Gradient Boosting** para Nivel Riesgo y Hotspot Crítico
+- **Random Forest** para Tendencia
+- **Logistic Regression** como alternativa cuando se requiera explicabilidad a stakeholders
+
+---
+
+### 2.7. Métricas de Evaluación (Capítulo 3 [6])
+
+**¿Por qué NO usamos Accuracy?**
+
+Géron [6] explica que en datasets desbalanceados, Accuracy es engañosa.
+
+**Ejemplo en nuestros datos:**
+- 95.44% de zonas son "Normal"
+- 4.56% de zonas son "Crítico"
+
+Un modelo "tonto" que siempre predice "Normal" tendría:
+- **Accuracy = 95.44%** ← Parece excelente!
+- Pero **NO detecta ningún hotspot crítico** ← Inútil operacionalmente
+
+**Métricas correctas para datos desbalanceados:**
+
+**1. Precision (Precisión):**
+```
+Precision = TP / (TP + FP)
+```
+**Interpretación:** "De las zonas que clasificamos como Críticas, ¿qué % realmente lo es?"
+**Valor operacional:** Evita falsas alarmas que desperdicien recursos
+
+**2. Recall (Sensibilidad):**
+```
+Recall = TP / (TP + FN)
+```
+**Interpretación:** "De todas las zonas realmente Críticas, ¿qué % detectamos?"
+**Valor operacional:** Evita perder hotspots que requieren intervención
+
+**3. F1-Score (Métrica principal):**
+```
+F1-Score = 2 × (Precision × Recall) / (Precision + Recall)
+```
+**Interpretación:** Media armónica que balancea Precision y Recall
+**Criterio de éxito:**
+- F1 > 0.85: Modelo listo para producción
+- F1 = 0.70-0.85: Funcional, considerar optimización
+- F1 < 0.70: Requiere mejora
+
+**Resultados de este proyecto:**
+- **Mejor F1 = 0.9956** (Gradient Boosting Hotspot Crítico)
+- **100% de modelos con F1 > 0.83** (todos deploy-ready)
+- Promedio F1 = 0.9410 (HURTO), 0.9387 (EXTORSIÓN)
+
+---
+
+### 2.8. Aprendizaje Supervisado: Entrenamiento y Evaluación
+
+**Concepto fundamental (Géron, Cap 3 [6]):**
+
+En aprendizaje supervisado, tenemos datos **etiquetados** donde conocemos la respuesta correcta.
+
+**En este proyecto:**
+
+```
+Datos de Entrenamiento (2020-2024):
+┌────────────────┬──────────────────┬──────────┐
+│ Features (X)   │                  │ Target(y)│
+├────────────────┼──────────────────┼──────────┤
+│ lag_1  lag_2   │  mes  dia_semana │  Clase   │
+│   8      6     │   3      2       │  Alto    │ ← El modelo aprende
+│   2      1     │   3      2       │  Bajo    │   este patrón
+│  12     15     │   4      3       │ Muy Alto │
+│  ...   ...     │  ...    ...      │  ...     │
+└────────────────┴──────────────────┴──────────┘
+        567,742 observaciones de HURTO
+
+Datos de Test (2024-2025):
+┌────────────────┬──────────────────┬──────────┬────────────┐
+│ Features (X)   │                  │ Target(y)│ Predicción │
+├────────────────┼──────────────────┼──────────┼────────────┤
+│   5      4     │   1      1       │  Medio   │  Medio  ✓  │
+│  18     22     │   1      2       │ Muy Alto │Muy Alto ✓  │
+│   1      0     │   1      3       │  Bajo    │  Bajo   ✓  │
+│  ...   ...     │  ...    ...      │  ...     │   ...      │
+└────────────────┴──────────────────┴──────────┴────────────┘
+        141,936 observaciones (nunca vistas durante entrenamiento)
+```
+
+**Proceso de entrenamiento:**
+1. Modelo analiza 567,742 casos con respuesta conocida
+2. Aprende patrones: "Si lag_1 > 10 y lag_2 > 8 → Probablemente Muy Alto"
+3. Ajusta parámetros internos para minimizar errores
+
+**Proceso de evaluación:**
+1. Modelo predice clase para 141,936 casos NUEVOS (futuro real)
+2. Comparamos predicción vs realidad
+3. Calculamos F1-Score, Precision, Recall
+
+**Split temporal (2020-2024 / 2024-2025):**
+- **NO es aleatorio:** Respeta cronología
+- **Simula predicción real:** Entrenamos con pasado, predecimos futuro
+- **Evita data leakage:** Modelo nunca ve datos de test durante entrenamiento
+
+---
+
+**FIN DEL MARCO TEÓRICO**
+
+=============================================================================
+NOTAS PARA INTEGRACIÓN:
+=============================================================================
+
+Esta sección debe insertarse como "SECCIÓN 2" completa, desplazando:
+- Estado del Arte → Sección 3
+- Metodología → Sección 4
+- Resultados → Sección 5
+- Discusión → Sección 6
+- Conclusiones → Sección 7
+
+Citas al libro (Hands-On ML Cap 3):
+- [6] A. Géron, Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd ed. Sebastopol, CA: O'Reilly Media, 2019, ch. 3.
+
+Todas las referencias [6] apuntan al Capítulo 3 del libro.

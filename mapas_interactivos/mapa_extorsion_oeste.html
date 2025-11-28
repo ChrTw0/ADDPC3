@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_fdd10b4db73478d971d850a7fd68bee7 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+        <div style="position: fixed;
+                    bottom: 50px; right: 50px;
+                    width: 320px; height: auto;
+                    background-color: white;
+                    border:3px solid #2a5298;
+                    z-index:9999;
+                    font-size:14px;
+                    padding: 15px;
+                    border-radius: 8px;
+                    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+                    ">
+            <h4 style="margin-top:0; color: #2a5298; border-bottom: 2px solid #2a5298; padding-bottom: 5px;">
+                📊 Leyenda - EXTORSION
+            </h4>
+            <p style="margin: 5px 0;"><b>Zona:</b> Lima Oeste/Costa</p>
+            <p style="margin: 5px 0;"><b>Hotspots:</b> 30</p>
+
+            <div style="background: #f0f8ff; padding: 10px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #2a5298;">
+                <p style="margin: 0; font-size: 12px;">
+                    <b>🟦 Rectángulos:</b> Áreas de ~555m × 555m<br>
+                    <b>📍 Marcadores:</b> Centro de cada área
+                </p>
+            </div>
+
+            <hr style="margin: 10px 0;">
+            <p style="margin: 8px 0; font-size: 13px;">
+                <span style="display: inline-block; width: 15px; height: 15px; background: red; border: 2px solid darkred; margin-right: 5px;"></span>
+                <span style="color: red; font-weight: bold;">>1000 crímenes (MUY ALTO)</span>
+            </p>
+            <p style="margin: 8px 0; font-size: 13px;">
+                <span style="display: inline-block; width: 15px; height: 15px; background: orange; border: 2px solid darkorange; margin-right: 5px;"></span>
+                <span style="color: orange; font-weight: bold;">500-1000 crímenes (ALTO)</span>
+            </p>
+            <p style="margin: 8px 0; font-size: 13px;">
+                <span style="display: inline-block; width: 15px; height: 15px; background: blue; border: 2px solid darkblue; margin-right: 5px;"></span>
+                <span style="color: blue; font-weight: bold;"><500 crímenes (MODERADO)</span>
+            </p>
+
+            <hr style="margin: 10px 0;">
+            <div style="background: #fffbcc; padding: 8px; border-radius: 5px; border-left: 3px solid #ffc107;">
+                <p style="font-size: 11px; margin: 0;">
+                    <b>💡 Tip:</b> Activa/desactiva capas en el control superior derecho ⬆️
+                </p>
+            </div>
+
+            <hr style="margin: 10px 0;">
+            <p style="font-size: 11px; color: gray; margin: 5px 0;">
+                📅 Período: Test 2024-2025<br>
+                📊 Fuente: PNP - Denuncias Lima<br>
+                📏 Grid: 0.005° (~555m)
+            </p>
+        </div>
+        
+    
+            <div class="folium-map" id="map_fdd10b4db73478d971d850a7fd68bee7" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_fdd10b4db73478d971d850a7fd68bee7 = L.map(
+                "map_fdd10b4db73478d971d850a7fd68bee7",
+                {
+                    center: [-12.1, -77.075],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+
+            
+
+        
+    
+            var tile_layer_db1934bdc1663a9b68e307fa553a0c38 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_db1934bdc1663a9b68e307fa553a0c38.addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+        
+    
+            var tile_layer_68d6b779075263474fcd7854992ac24a = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_68d6b779075263474fcd7854992ac24a.addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+        
+    
+            var tile_layer_a4b7ac0dd6f3701a8b191ca9bb75adcf = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a4b7ac0dd6f3701a8b191ca9bb75adcf.addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+        
+    
+            var heat_map_b36bb8d8abb92cba45d382fdfe1bdfaf = L.heatLayer(
+                [[-12.055, -77.06, 14078.0], [-12.035, -77.05, 5295.0], [-12.05, -77.045, 3985.0], [-12.08, -77.015, 3543.0], [-12.165000000000001, -77.02, 3454.0], [-12.14, -77.005, 2182.0], [-12.08, -77.055, 2138.0], [-12.035, -77.04, 1951.0], [-12.125, -77.015, 1770.0], [-12.055, -77.005, 1379.0], [-12.06, -77.06, 1325.0], [-12.030000000000001, -77.01, 1176.0], [-12.07, -77.09, 1133.0], [-12.09, -77.005, 1098.0], [-12.045, -77.08, 871.0], [-12.035, -77.02, 863.0], [-12.120000000000001, -77.005, 731.0], [-12.19, -77.0, 685.0], [-12.06, -77.08500000000001, 651.0], [-12.095, -77.075, 632.0], [-12.105, -77.05, 545.0], [-12.07, -77.075, 533.0], [-12.09, -77.045, 444.0], [-12.030000000000001, -77.015, 438.0], [-12.185, -77.01, 433.0], [-12.14, -77.025, 374.0], [-12.030000000000001, -77.035, 336.0], [-12.145, -77.025, 332.0], [-12.19, -77.035, 248.0], [-12.025, -77.08500000000001, 245.0]],
+                {
+  "minOpacity": 0.4,
+  "maxZoom": 18,
+  "radius": 15,
+  "blur": 20,
+  "gradient": {
+  0.0: "blue",
+  0.3: "lime",
+  0.5: "yellow",
+  0.7: "orange",
+  1.0: "red",
+},
+}
+            );
+        
+    
+            heat_map_b36bb8d8abb92cba45d382fdfe1bdfaf.addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+        
+    
+            var feature_group_73650c2332dad4aa7d75b08c541326e5 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var rectangle_f2b492aa3bbef6cf706db5e65fcaca5b = L.rectangle(
+                [[-12.055, -77.06], [-12.049999999999999, -77.055]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_d238cb0b862243f8c12f515100706a00 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_50b2498ec7491b2e643f2b4c04545cd7 = $(`<div id="html_50b2498ec7491b2e643f2b4c04545cd7" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">14078</b>                     </div></div>`)[0];
+                popup_d238cb0b862243f8c12f515100706a00.setContent(html_50b2498ec7491b2e643f2b4c04545cd7);
+            
+        
+
+        rectangle_f2b492aa3bbef6cf706db5e65fcaca5b.bindPopup(popup_d238cb0b862243f8c12f515100706a00)
+        ;
+
+        
+    
+    
+            rectangle_f2b492aa3bbef6cf706db5e65fcaca5b.bindTooltip(
+                `<div>
+                     Celda: 14078 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_57f016c70c0c6a21d49edae869b275f8 = L.rectangle(
+                [[-12.035, -77.05], [-12.03, -77.045]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_dbf7a8b3a3ff9e305e0f09b7d3c046db = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_45e7444fb94f0af05e909cb6d4f108d0 = $(`<div id="html_45e7444fb94f0af05e909cb6d4f108d0" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">5295</b>                     </div></div>`)[0];
+                popup_dbf7a8b3a3ff9e305e0f09b7d3c046db.setContent(html_45e7444fb94f0af05e909cb6d4f108d0);
+            
+        
+
+        rectangle_57f016c70c0c6a21d49edae869b275f8.bindPopup(popup_dbf7a8b3a3ff9e305e0f09b7d3c046db)
+        ;
+
+        
+    
+    
+            rectangle_57f016c70c0c6a21d49edae869b275f8.bindTooltip(
+                `<div>
+                     Celda: 5295 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_f85242aff9c4a9944daf1f7b2dff7598 = L.rectangle(
+                [[-12.05, -77.045], [-12.045, -77.04]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_38af49222b29ce5694f242f00a06c6f4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_5ab30d3c72f99a6ca2394e5dfa14d398 = $(`<div id="html_5ab30d3c72f99a6ca2394e5dfa14d398" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">3985</b>                     </div></div>`)[0];
+                popup_38af49222b29ce5694f242f00a06c6f4.setContent(html_5ab30d3c72f99a6ca2394e5dfa14d398);
+            
+        
+
+        rectangle_f85242aff9c4a9944daf1f7b2dff7598.bindPopup(popup_38af49222b29ce5694f242f00a06c6f4)
+        ;
+
+        
+    
+    
+            rectangle_f85242aff9c4a9944daf1f7b2dff7598.bindTooltip(
+                `<div>
+                     Celda: 3985 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_0e3a0022f884124398c30e08a641b461 = L.rectangle(
+                [[-12.08, -77.015], [-12.075, -77.01]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_69a41260b4a1784d1f1aa2ea7cef01c6 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b98d27f9112635a21a229f54677f6ecb = $(`<div id="html_b98d27f9112635a21a229f54677f6ecb" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">3543</b>                     </div></div>`)[0];
+                popup_69a41260b4a1784d1f1aa2ea7cef01c6.setContent(html_b98d27f9112635a21a229f54677f6ecb);
+            
+        
+
+        rectangle_0e3a0022f884124398c30e08a641b461.bindPopup(popup_69a41260b4a1784d1f1aa2ea7cef01c6)
+        ;
+
+        
+    
+    
+            rectangle_0e3a0022f884124398c30e08a641b461.bindTooltip(
+                `<div>
+                     Celda: 3543 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_6101f196569326d0a56914cee860866f = L.rectangle(
+                [[-12.165000000000001, -77.02], [-12.16, -77.015]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_21ebd07ef68fb4ce023ff52528eb722b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_5888efbd8da49327cdd364245aefcd67 = $(`<div id="html_5888efbd8da49327cdd364245aefcd67" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">3454</b>                     </div></div>`)[0];
+                popup_21ebd07ef68fb4ce023ff52528eb722b.setContent(html_5888efbd8da49327cdd364245aefcd67);
+            
+        
+
+        rectangle_6101f196569326d0a56914cee860866f.bindPopup(popup_21ebd07ef68fb4ce023ff52528eb722b)
+        ;
+
+        
+    
+    
+            rectangle_6101f196569326d0a56914cee860866f.bindTooltip(
+                `<div>
+                     Celda: 3454 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_e75ae2aa592be3006282e17ea05f38fa = L.rectangle(
+                [[-12.14, -77.005], [-12.135, -77.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_88bda9f999b7396d3cddd64b8ed3b99d = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ee387997a7b34437e624e5772af9bab4 = $(`<div id="html_ee387997a7b34437e624e5772af9bab4" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">2182</b>                     </div></div>`)[0];
+                popup_88bda9f999b7396d3cddd64b8ed3b99d.setContent(html_ee387997a7b34437e624e5772af9bab4);
+            
+        
+
+        rectangle_e75ae2aa592be3006282e17ea05f38fa.bindPopup(popup_88bda9f999b7396d3cddd64b8ed3b99d)
+        ;
+
+        
+    
+    
+            rectangle_e75ae2aa592be3006282e17ea05f38fa.bindTooltip(
+                `<div>
+                     Celda: 2182 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_cdebc8e954f91d16e63aef94aa80cfa7 = L.rectangle(
+                [[-12.08, -77.055], [-12.075, -77.05000000000001]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_116589e92a2417223beccee8cea15592 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_077117947aaa13ee64e6c8fb8e463f15 = $(`<div id="html_077117947aaa13ee64e6c8fb8e463f15" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">2138</b>                     </div></div>`)[0];
+                popup_116589e92a2417223beccee8cea15592.setContent(html_077117947aaa13ee64e6c8fb8e463f15);
+            
+        
+
+        rectangle_cdebc8e954f91d16e63aef94aa80cfa7.bindPopup(popup_116589e92a2417223beccee8cea15592)
+        ;
+
+        
+    
+    
+            rectangle_cdebc8e954f91d16e63aef94aa80cfa7.bindTooltip(
+                `<div>
+                     Celda: 2138 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_03db59611ccfadeed18a43c526ebe35d = L.rectangle(
+                [[-12.035, -77.04], [-12.03, -77.03500000000001]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_b81d7992db6cd3416981d4e40551fd9e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1d6b91cf8f8d809cfcd80ea2a1479978 = $(`<div id="html_1d6b91cf8f8d809cfcd80ea2a1479978" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">1951</b>                     </div></div>`)[0];
+                popup_b81d7992db6cd3416981d4e40551fd9e.setContent(html_1d6b91cf8f8d809cfcd80ea2a1479978);
+            
+        
+
+        rectangle_03db59611ccfadeed18a43c526ebe35d.bindPopup(popup_b81d7992db6cd3416981d4e40551fd9e)
+        ;
+
+        
+    
+    
+            rectangle_03db59611ccfadeed18a43c526ebe35d.bindTooltip(
+                `<div>
+                     Celda: 1951 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_e6ebcb610653f868e70fa9fe0b6b287e = L.rectangle(
+                [[-12.125, -77.015], [-12.12, -77.01]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_accc9607a85ec773ed8b667ef5d87ca6 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b7626ba2b7ee7102e2202a75283d6b6c = $(`<div id="html_b7626ba2b7ee7102e2202a75283d6b6c" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">1770</b>                     </div></div>`)[0];
+                popup_accc9607a85ec773ed8b667ef5d87ca6.setContent(html_b7626ba2b7ee7102e2202a75283d6b6c);
+            
+        
+
+        rectangle_e6ebcb610653f868e70fa9fe0b6b287e.bindPopup(popup_accc9607a85ec773ed8b667ef5d87ca6)
+        ;
+
+        
+    
+    
+            rectangle_e6ebcb610653f868e70fa9fe0b6b287e.bindTooltip(
+                `<div>
+                     Celda: 1770 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_a5ebd851abfeb496836420e63218404f = L.rectangle(
+                [[-12.055, -77.005], [-12.049999999999999, -77.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_9bb57c2561dfd4cbec1df420d5164119 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_fd0bae761dd4236c81c6adf9078a4435 = $(`<div id="html_fd0bae761dd4236c81c6adf9078a4435" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">1379</b>                     </div></div>`)[0];
+                popup_9bb57c2561dfd4cbec1df420d5164119.setContent(html_fd0bae761dd4236c81c6adf9078a4435);
+            
+        
+
+        rectangle_a5ebd851abfeb496836420e63218404f.bindPopup(popup_9bb57c2561dfd4cbec1df420d5164119)
+        ;
+
+        
+    
+    
+            rectangle_a5ebd851abfeb496836420e63218404f.bindTooltip(
+                `<div>
+                     Celda: 1379 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_b7f1290c9e29173a3077a3adf013cfe8 = L.rectangle(
+                [[-12.06, -77.06], [-12.055, -77.055]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_376f35834682a9e4c032b2ae2e38b06b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d0865b60fc6403d71fc0cd446e0e436f = $(`<div id="html_d0865b60fc6403d71fc0cd446e0e436f" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">1325</b>                     </div></div>`)[0];
+                popup_376f35834682a9e4c032b2ae2e38b06b.setContent(html_d0865b60fc6403d71fc0cd446e0e436f);
+            
+        
+
+        rectangle_b7f1290c9e29173a3077a3adf013cfe8.bindPopup(popup_376f35834682a9e4c032b2ae2e38b06b)
+        ;
+
+        
+    
+    
+            rectangle_b7f1290c9e29173a3077a3adf013cfe8.bindTooltip(
+                `<div>
+                     Celda: 1325 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_aba7b2aef6ff146e6581bfaeeefc9967 = L.rectangle(
+                [[-12.030000000000001, -77.01], [-12.025, -77.00500000000001]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_6610e49f0775fe2ac492dfa88ae70810 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_6d5df965020b0da6f4ed8cb7334d08c5 = $(`<div id="html_6d5df965020b0da6f4ed8cb7334d08c5" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">1176</b>                     </div></div>`)[0];
+                popup_6610e49f0775fe2ac492dfa88ae70810.setContent(html_6d5df965020b0da6f4ed8cb7334d08c5);
+            
+        
+
+        rectangle_aba7b2aef6ff146e6581bfaeeefc9967.bindPopup(popup_6610e49f0775fe2ac492dfa88ae70810)
+        ;
+
+        
+    
+    
+            rectangle_aba7b2aef6ff146e6581bfaeeefc9967.bindTooltip(
+                `<div>
+                     Celda: 1176 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_d22a04460560e52c855a7e5b2c376cf1 = L.rectangle(
+                [[-12.07, -77.09], [-12.065, -77.08500000000001]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_e596edbbef95cab274202825dbac7431 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b2b2aeb5cccf8f285129e53548d4daa9 = $(`<div id="html_b2b2aeb5cccf8f285129e53548d4daa9" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">1133</b>                     </div></div>`)[0];
+                popup_e596edbbef95cab274202825dbac7431.setContent(html_b2b2aeb5cccf8f285129e53548d4daa9);
+            
+        
+
+        rectangle_d22a04460560e52c855a7e5b2c376cf1.bindPopup(popup_e596edbbef95cab274202825dbac7431)
+        ;
+
+        
+    
+    
+            rectangle_d22a04460560e52c855a7e5b2c376cf1.bindTooltip(
+                `<div>
+                     Celda: 1133 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_323fb5cc893e86f79e9dc4c108b23c8e = L.rectangle(
+                [[-12.09, -77.005], [-12.084999999999999, -77.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_bd290784e44da3457c92447cfd18645e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8fd3d39901b555f859f300c6e6ee2b18 = $(`<div id="html_8fd3d39901b555f859f300c6e6ee2b18" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: red;">1098</b>                     </div></div>`)[0];
+                popup_bd290784e44da3457c92447cfd18645e.setContent(html_8fd3d39901b555f859f300c6e6ee2b18);
+            
+        
+
+        rectangle_323fb5cc893e86f79e9dc4c108b23c8e.bindPopup(popup_bd290784e44da3457c92447cfd18645e)
+        ;
+
+        
+    
+    
+            rectangle_323fb5cc893e86f79e9dc4c108b23c8e.bindTooltip(
+                `<div>
+                     Celda: 1098 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_b464707adcb9583f0973ece631b6abeb = L.rectangle(
+                [[-12.045, -77.08], [-12.04, -77.075]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_9a5a3e33709976d812237c717428fc2b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_feeeb45d4ad1e4c82309533b03238d7f = $(`<div id="html_feeeb45d4ad1e4c82309533b03238d7f" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">871</b>                     </div></div>`)[0];
+                popup_9a5a3e33709976d812237c717428fc2b.setContent(html_feeeb45d4ad1e4c82309533b03238d7f);
+            
+        
+
+        rectangle_b464707adcb9583f0973ece631b6abeb.bindPopup(popup_9a5a3e33709976d812237c717428fc2b)
+        ;
+
+        
+    
+    
+            rectangle_b464707adcb9583f0973ece631b6abeb.bindTooltip(
+                `<div>
+                     Celda: 871 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_753d3f3665a8688a67a9f28ec99b723c = L.rectangle(
+                [[-12.035, -77.02], [-12.03, -77.015]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_ae9d15521cfeb18a1f9a5cc8ffa34a35 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c584d5a21f82ca55a3ab318122d4f964 = $(`<div id="html_c584d5a21f82ca55a3ab318122d4f964" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">863</b>                     </div></div>`)[0];
+                popup_ae9d15521cfeb18a1f9a5cc8ffa34a35.setContent(html_c584d5a21f82ca55a3ab318122d4f964);
+            
+        
+
+        rectangle_753d3f3665a8688a67a9f28ec99b723c.bindPopup(popup_ae9d15521cfeb18a1f9a5cc8ffa34a35)
+        ;
+
+        
+    
+    
+            rectangle_753d3f3665a8688a67a9f28ec99b723c.bindTooltip(
+                `<div>
+                     Celda: 863 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_dcaaca828a3eb92b81cb6d33c82c4583 = L.rectangle(
+                [[-12.120000000000001, -77.005], [-12.115, -77.0]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_0d449ca55784827b50d91f560b0ca02f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_96061960ea8adc79cd93a96e62c4caea = $(`<div id="html_96061960ea8adc79cd93a96e62c4caea" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">731</b>                     </div></div>`)[0];
+                popup_0d449ca55784827b50d91f560b0ca02f.setContent(html_96061960ea8adc79cd93a96e62c4caea);
+            
+        
+
+        rectangle_dcaaca828a3eb92b81cb6d33c82c4583.bindPopup(popup_0d449ca55784827b50d91f560b0ca02f)
+        ;
+
+        
+    
+    
+            rectangle_dcaaca828a3eb92b81cb6d33c82c4583.bindTooltip(
+                `<div>
+                     Celda: 731 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_ee25f60655ec2980487ab40db6106b6d = L.rectangle(
+                [[-12.19, -77.0], [-12.184999999999999, -76.995]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_c8c9e6b9c3970ceb7f45ce80e84ae193 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1404a26ae37b1839694e6207882c2ce7 = $(`<div id="html_1404a26ae37b1839694e6207882c2ce7" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">685</b>                     </div></div>`)[0];
+                popup_c8c9e6b9c3970ceb7f45ce80e84ae193.setContent(html_1404a26ae37b1839694e6207882c2ce7);
+            
+        
+
+        rectangle_ee25f60655ec2980487ab40db6106b6d.bindPopup(popup_c8c9e6b9c3970ceb7f45ce80e84ae193)
+        ;
+
+        
+    
+    
+            rectangle_ee25f60655ec2980487ab40db6106b6d.bindTooltip(
+                `<div>
+                     Celda: 685 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_9479cc411ef382743bb8c8359d19c7c2 = L.rectangle(
+                [[-12.06, -77.08500000000001], [-12.055, -77.08000000000001]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_bb0b4a117208a1e2360dbe0a93f40249 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_426899c2d2fc2f2cf6cc74f0985f62f2 = $(`<div id="html_426899c2d2fc2f2cf6cc74f0985f62f2" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">651</b>                     </div></div>`)[0];
+                popup_bb0b4a117208a1e2360dbe0a93f40249.setContent(html_426899c2d2fc2f2cf6cc74f0985f62f2);
+            
+        
+
+        rectangle_9479cc411ef382743bb8c8359d19c7c2.bindPopup(popup_bb0b4a117208a1e2360dbe0a93f40249)
+        ;
+
+        
+    
+    
+            rectangle_9479cc411ef382743bb8c8359d19c7c2.bindTooltip(
+                `<div>
+                     Celda: 651 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_9e9a7001311a3f24354a6619e6b0ddad = L.rectangle(
+                [[-12.095, -77.075], [-12.09, -77.07000000000001]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_42ee9385bcf6a72773bbe73390a25fee = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_86e359e091aeecdf7a6a81fb49c45100 = $(`<div id="html_86e359e091aeecdf7a6a81fb49c45100" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">632</b>                     </div></div>`)[0];
+                popup_42ee9385bcf6a72773bbe73390a25fee.setContent(html_86e359e091aeecdf7a6a81fb49c45100);
+            
+        
+
+        rectangle_9e9a7001311a3f24354a6619e6b0ddad.bindPopup(popup_42ee9385bcf6a72773bbe73390a25fee)
+        ;
+
+        
+    
+    
+            rectangle_9e9a7001311a3f24354a6619e6b0ddad.bindTooltip(
+                `<div>
+                     Celda: 632 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_4fcce01b18669053284b0d66ade5c3e9 = L.rectangle(
+                [[-12.105, -77.05], [-12.1, -77.045]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_dcdd265edb1c5b791a1172b8ccd1ec08 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c2921ab1682958926aa03374550faa51 = $(`<div id="html_c2921ab1682958926aa03374550faa51" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">545</b>                     </div></div>`)[0];
+                popup_dcdd265edb1c5b791a1172b8ccd1ec08.setContent(html_c2921ab1682958926aa03374550faa51);
+            
+        
+
+        rectangle_4fcce01b18669053284b0d66ade5c3e9.bindPopup(popup_dcdd265edb1c5b791a1172b8ccd1ec08)
+        ;
+
+        
+    
+    
+            rectangle_4fcce01b18669053284b0d66ade5c3e9.bindTooltip(
+                `<div>
+                     Celda: 545 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_a9606ec40e0851f743900223c1451041 = L.rectangle(
+                [[-12.07, -77.075], [-12.065, -77.07000000000001]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_4eaff548a0b998f87ee8440272bf5e21 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_894962c64f03764ba892a9394b7999d4 = $(`<div id="html_894962c64f03764ba892a9394b7999d4" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: orange;">533</b>                     </div></div>`)[0];
+                popup_4eaff548a0b998f87ee8440272bf5e21.setContent(html_894962c64f03764ba892a9394b7999d4);
+            
+        
+
+        rectangle_a9606ec40e0851f743900223c1451041.bindPopup(popup_4eaff548a0b998f87ee8440272bf5e21)
+        ;
+
+        
+    
+    
+            rectangle_a9606ec40e0851f743900223c1451041.bindTooltip(
+                `<div>
+                     Celda: 533 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_7887b4ffaa73ccb1a054a2634d1293d0 = L.rectangle(
+                [[-12.09, -77.045], [-12.084999999999999, -77.04]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_cf2caf70b3ad347cc5f2c8d5f883172c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_9a6e44beecbeaf46878e4d731e80332e = $(`<div id="html_9a6e44beecbeaf46878e4d731e80332e" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">444</b>                     </div></div>`)[0];
+                popup_cf2caf70b3ad347cc5f2c8d5f883172c.setContent(html_9a6e44beecbeaf46878e4d731e80332e);
+            
+        
+
+        rectangle_7887b4ffaa73ccb1a054a2634d1293d0.bindPopup(popup_cf2caf70b3ad347cc5f2c8d5f883172c)
+        ;
+
+        
+    
+    
+            rectangle_7887b4ffaa73ccb1a054a2634d1293d0.bindTooltip(
+                `<div>
+                     Celda: 444 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_7d800311521bce941a6178f3cd9ef446 = L.rectangle(
+                [[-12.030000000000001, -77.015], [-12.025, -77.01]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_8b51f1d8a22d44fab0e90d8631aab47f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_7b58644aa460be9037e2b092d7103b7a = $(`<div id="html_7b58644aa460be9037e2b092d7103b7a" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">438</b>                     </div></div>`)[0];
+                popup_8b51f1d8a22d44fab0e90d8631aab47f.setContent(html_7b58644aa460be9037e2b092d7103b7a);
+            
+        
+
+        rectangle_7d800311521bce941a6178f3cd9ef446.bindPopup(popup_8b51f1d8a22d44fab0e90d8631aab47f)
+        ;
+
+        
+    
+    
+            rectangle_7d800311521bce941a6178f3cd9ef446.bindTooltip(
+                `<div>
+                     Celda: 438 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_6db1182da772124e435d241fcc8dde23 = L.rectangle(
+                [[-12.185, -77.01], [-12.18, -77.00500000000001]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_7b24974ec44d9f3938ba173d319a9325 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_505776f37f754c5b9ce7d110d351688d = $(`<div id="html_505776f37f754c5b9ce7d110d351688d" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">433</b>                     </div></div>`)[0];
+                popup_7b24974ec44d9f3938ba173d319a9325.setContent(html_505776f37f754c5b9ce7d110d351688d);
+            
+        
+
+        rectangle_6db1182da772124e435d241fcc8dde23.bindPopup(popup_7b24974ec44d9f3938ba173d319a9325)
+        ;
+
+        
+    
+    
+            rectangle_6db1182da772124e435d241fcc8dde23.bindTooltip(
+                `<div>
+                     Celda: 433 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_5f1822c414ed8e0dd58015251b1204d4 = L.rectangle(
+                [[-12.14, -77.025], [-12.135, -77.02000000000001]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_30d6314e78abc94925a8a1c14961c18e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a7e6eda6e298bc48bbba295b9f3e2897 = $(`<div id="html_a7e6eda6e298bc48bbba295b9f3e2897" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">374</b>                     </div></div>`)[0];
+                popup_30d6314e78abc94925a8a1c14961c18e.setContent(html_a7e6eda6e298bc48bbba295b9f3e2897);
+            
+        
+
+        rectangle_5f1822c414ed8e0dd58015251b1204d4.bindPopup(popup_30d6314e78abc94925a8a1c14961c18e)
+        ;
+
+        
+    
+    
+            rectangle_5f1822c414ed8e0dd58015251b1204d4.bindTooltip(
+                `<div>
+                     Celda: 374 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_daf0dfdc73f3ab00c6169f824a9eae15 = L.rectangle(
+                [[-12.030000000000001, -77.035], [-12.025, -77.03]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_91335f5f705929ed6881567ec0b96830 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_94620f8abe96ef17b14309db6b0d2366 = $(`<div id="html_94620f8abe96ef17b14309db6b0d2366" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">336</b>                     </div></div>`)[0];
+                popup_91335f5f705929ed6881567ec0b96830.setContent(html_94620f8abe96ef17b14309db6b0d2366);
+            
+        
+
+        rectangle_daf0dfdc73f3ab00c6169f824a9eae15.bindPopup(popup_91335f5f705929ed6881567ec0b96830)
+        ;
+
+        
+    
+    
+            rectangle_daf0dfdc73f3ab00c6169f824a9eae15.bindTooltip(
+                `<div>
+                     Celda: 336 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_a063dadb22407ce43f006e1568a63c1b = L.rectangle(
+                [[-12.145, -77.025], [-12.139999999999999, -77.02000000000001]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_3d0444a6cd34284095bfd4ff706e9401 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1a84229f032f4c053170c8cbd03c7c66 = $(`<div id="html_1a84229f032f4c053170c8cbd03c7c66" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">332</b>                     </div></div>`)[0];
+                popup_3d0444a6cd34284095bfd4ff706e9401.setContent(html_1a84229f032f4c053170c8cbd03c7c66);
+            
+        
+
+        rectangle_a063dadb22407ce43f006e1568a63c1b.bindPopup(popup_3d0444a6cd34284095bfd4ff706e9401)
+        ;
+
+        
+    
+    
+            rectangle_a063dadb22407ce43f006e1568a63c1b.bindTooltip(
+                `<div>
+                     Celda: 332 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_f095101e9b78b93a6c6db8dc56872eb7 = L.rectangle(
+                [[-12.19, -77.035], [-12.184999999999999, -77.03]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_07ab0654513c8198a53348a32368db3b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2da0955f9396febaa2164ae54978de20 = $(`<div id="html_2da0955f9396febaa2164ae54978de20" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">248</b>                     </div></div>`)[0];
+                popup_07ab0654513c8198a53348a32368db3b.setContent(html_2da0955f9396febaa2164ae54978de20);
+            
+        
+
+        rectangle_f095101e9b78b93a6c6db8dc56872eb7.bindPopup(popup_07ab0654513c8198a53348a32368db3b)
+        ;
+
+        
+    
+    
+            rectangle_f095101e9b78b93a6c6db8dc56872eb7.bindTooltip(
+                `<div>
+                     Celda: 248 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_7c3eeb51ea3e61d544880e884292d822 = L.rectangle(
+                [[-12.025, -77.08500000000001], [-12.02, -77.08000000000001]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_73650c2332dad4aa7d75b08c541326e5);
+        
+    
+        var popup_3cacbf9c123636e64459c271c126c3aa = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f421f3bc0cb8099acde9fcc079dd90ee = $(`<div id="html_f421f3bc0cb8099acde9fcc079dd90ee" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial;">                         <b>Área de Grid</b><br>                         Tamaño: ~555m × 555m<br>                         Crímenes: <b style="color: blue;">245</b>                     </div></div>`)[0];
+                popup_3cacbf9c123636e64459c271c126c3aa.setContent(html_f421f3bc0cb8099acde9fcc079dd90ee);
+            
+        
+
+        rectangle_7c3eeb51ea3e61d544880e884292d822.bindPopup(popup_3cacbf9c123636e64459c271c126c3aa)
+        ;
+
+        
+    
+    
+            rectangle_7c3eeb51ea3e61d544880e884292d822.bindTooltip(
+                `<div>
+                     Celda: 245 crímenes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_73650c2332dad4aa7d75b08c541326e5.addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+        
+    
+            var feature_group_3b2cae87adda37fa9bf6c12f41440672 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_4f10b8c0fd1db747207ec18b43fc14ac = L.marker(
+                [-12.0525, -77.0575],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_31f4eeedda661115b0a9146d27450a70 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f9287ad342698dd83807715798a4c8f5 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6de5b03bccaf8e3b0e55fd763d792fa4 = $(`<div id="html_6de5b03bccaf8e3b0e55fd763d792fa4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             14078                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.05500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.06000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>14078                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_f9287ad342698dd83807715798a4c8f5.setContent(html_6de5b03bccaf8e3b0e55fd763d792fa4);
+            
+        
+
+        marker_4f10b8c0fd1db747207ec18b43fc14ac.bindPopup(popup_f9287ad342698dd83807715798a4c8f5)
+        ;
+
+        
+    
+    
+            marker_4f10b8c0fd1db747207ec18b43fc14ac.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 14078 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4f10b8c0fd1db747207ec18b43fc14ac.setIcon(icon_31f4eeedda661115b0a9146d27450a70);
+            
+    
+            var marker_c63be85d4cd7ea1f1f868bfd7174e450 = L.marker(
+                [-12.0325, -77.0475],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_d9ce2d195ce1f1582c0b756003e2e408 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_11236a4987c11148ef055d6fa1eef596 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_242bce8ac091a28902273451a2499b4f = $(`<div id="html_242bce8ac091a28902273451a2499b4f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             5295                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.03500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.05000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>5295                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_11236a4987c11148ef055d6fa1eef596.setContent(html_242bce8ac091a28902273451a2499b4f);
+            
+        
+
+        marker_c63be85d4cd7ea1f1f868bfd7174e450.bindPopup(popup_11236a4987c11148ef055d6fa1eef596)
+        ;
+
+        
+    
+    
+            marker_c63be85d4cd7ea1f1f868bfd7174e450.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 5295 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c63be85d4cd7ea1f1f868bfd7174e450.setIcon(icon_d9ce2d195ce1f1582c0b756003e2e408);
+            
+    
+            var marker_0d22428d32dd126d5cf73e557e5b13b3 = L.marker(
+                [-12.047500000000001, -77.0425],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_6b2d253c658c805ebaeea2b3d675214a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7a10ba252f7bc46e60a4144305d84943 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_70b1ef5df245c11a4cb8e58c19d0ddb4 = $(`<div id="html_70b1ef5df245c11a4cb8e58c19d0ddb4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             3985                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.05000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.04500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>3985                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_7a10ba252f7bc46e60a4144305d84943.setContent(html_70b1ef5df245c11a4cb8e58c19d0ddb4);
+            
+        
+
+        marker_0d22428d32dd126d5cf73e557e5b13b3.bindPopup(popup_7a10ba252f7bc46e60a4144305d84943)
+        ;
+
+        
+    
+    
+            marker_0d22428d32dd126d5cf73e557e5b13b3.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 3985 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0d22428d32dd126d5cf73e557e5b13b3.setIcon(icon_6b2d253c658c805ebaeea2b3d675214a);
+            
+    
+            var marker_b9758c17e3c9e152fa51578178d471d0 = L.marker(
+                [-12.0775, -77.0125],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_90574a0d1564e008b7b05ceb11641626 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a933575b82ee78c693509e346c3fd95f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4c059a8ea9be412c21bc1cd786f54ad2 = $(`<div id="html_4c059a8ea9be412c21bc1cd786f54ad2" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             3543                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.08000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.01500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>3543                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_a933575b82ee78c693509e346c3fd95f.setContent(html_4c059a8ea9be412c21bc1cd786f54ad2);
+            
+        
+
+        marker_b9758c17e3c9e152fa51578178d471d0.bindPopup(popup_a933575b82ee78c693509e346c3fd95f)
+        ;
+
+        
+    
+    
+            marker_b9758c17e3c9e152fa51578178d471d0.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 3543 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b9758c17e3c9e152fa51578178d471d0.setIcon(icon_90574a0d1564e008b7b05ceb11641626);
+            
+    
+            var marker_0cda1627738dfdd8046e5b984351dc6a = L.marker(
+                [-12.162500000000001, -77.0175],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_d274157a251c44550549ff96e4b2cbee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_331811714ca77f2752ff13da79f5333c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e2988d20efcc2b1180577138ec87a2c8 = $(`<div id="html_e2988d20efcc2b1180577138ec87a2c8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             3454                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.16500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.02000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>3454                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_331811714ca77f2752ff13da79f5333c.setContent(html_e2988d20efcc2b1180577138ec87a2c8);
+            
+        
+
+        marker_0cda1627738dfdd8046e5b984351dc6a.bindPopup(popup_331811714ca77f2752ff13da79f5333c)
+        ;
+
+        
+    
+    
+            marker_0cda1627738dfdd8046e5b984351dc6a.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 3454 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0cda1627738dfdd8046e5b984351dc6a.setIcon(icon_d274157a251c44550549ff96e4b2cbee);
+            
+    
+            var marker_aca14864a487366b4b21a74f1b1f0924 = L.marker(
+                [-12.137500000000001, -77.0025],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_b7069559057f0445824dd2962b13dcd3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3bf8181a7ab5ab003d6c5902339b8d9e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a8d3d5f88c221ab7929eb829577af2e3 = $(`<div id="html_a8d3d5f88c221ab7929eb829577af2e3" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             2182                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.14000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.00500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>2182                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_3bf8181a7ab5ab003d6c5902339b8d9e.setContent(html_a8d3d5f88c221ab7929eb829577af2e3);
+            
+        
+
+        marker_aca14864a487366b4b21a74f1b1f0924.bindPopup(popup_3bf8181a7ab5ab003d6c5902339b8d9e)
+        ;
+
+        
+    
+    
+            marker_aca14864a487366b4b21a74f1b1f0924.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 2182 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aca14864a487366b4b21a74f1b1f0924.setIcon(icon_b7069559057f0445824dd2962b13dcd3);
+            
+    
+            var marker_4431a71acad6b6d234d7d4d1e4417fc0 = L.marker(
+                [-12.0775, -77.05250000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_595eb29e5339232db67b96f38e72db01 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0921c74d70be1e7d547e2497d31ab17b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e6dffa7652072383b909c684940c2122 = $(`<div id="html_e6dffa7652072383b909c684940c2122" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             2138                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.08000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.05500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>2138                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_0921c74d70be1e7d547e2497d31ab17b.setContent(html_e6dffa7652072383b909c684940c2122);
+            
+        
+
+        marker_4431a71acad6b6d234d7d4d1e4417fc0.bindPopup(popup_0921c74d70be1e7d547e2497d31ab17b)
+        ;
+
+        
+    
+    
+            marker_4431a71acad6b6d234d7d4d1e4417fc0.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 2138 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4431a71acad6b6d234d7d4d1e4417fc0.setIcon(icon_595eb29e5339232db67b96f38e72db01);
+            
+    
+            var marker_e3878e4a6adf07f27c2f774d6f5dbf2a = L.marker(
+                [-12.0325, -77.03750000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_9967db665f91dfe0257f943b165ebdc5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dfad6cdf54ebbca113cd28470dd457ac = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3f781749ee5efcd202304fbcbcc241e5 = $(`<div id="html_3f781749ee5efcd202304fbcbcc241e5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             1951                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.03500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.04000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>1951                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_dfad6cdf54ebbca113cd28470dd457ac.setContent(html_3f781749ee5efcd202304fbcbcc241e5);
+            
+        
+
+        marker_e3878e4a6adf07f27c2f774d6f5dbf2a.bindPopup(popup_dfad6cdf54ebbca113cd28470dd457ac)
+        ;
+
+        
+    
+    
+            marker_e3878e4a6adf07f27c2f774d6f5dbf2a.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 1951 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e3878e4a6adf07f27c2f774d6f5dbf2a.setIcon(icon_9967db665f91dfe0257f943b165ebdc5);
+            
+    
+            var marker_2e8d47eec34b12cf02f4c79d9932071e = L.marker(
+                [-12.1225, -77.0125],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_4b633bd622648b708f67ee86a65547bf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4fc1aa06855059d2b40a93b5b0797cf6 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9b703984f594f1a13b21228613c69190 = $(`<div id="html_9b703984f594f1a13b21228613c69190" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             1770                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.12500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.01500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>1770                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_4fc1aa06855059d2b40a93b5b0797cf6.setContent(html_9b703984f594f1a13b21228613c69190);
+            
+        
+
+        marker_2e8d47eec34b12cf02f4c79d9932071e.bindPopup(popup_4fc1aa06855059d2b40a93b5b0797cf6)
+        ;
+
+        
+    
+    
+            marker_2e8d47eec34b12cf02f4c79d9932071e.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 1770 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2e8d47eec34b12cf02f4c79d9932071e.setIcon(icon_4b633bd622648b708f67ee86a65547bf);
+            
+    
+            var marker_ca2ac38af0ac4e3d2b4beca6a795f2d6 = L.marker(
+                [-12.0525, -77.0025],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_c0d0df981f2d376467440e6e204a16d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_72214dea35b595a4383cd98af5db94e6 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7c5547ed68f39f36e745f4fc53a54f8c = $(`<div id="html_7c5547ed68f39f36e745f4fc53a54f8c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             1379                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.05500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.00500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>1379                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_72214dea35b595a4383cd98af5db94e6.setContent(html_7c5547ed68f39f36e745f4fc53a54f8c);
+            
+        
+
+        marker_ca2ac38af0ac4e3d2b4beca6a795f2d6.bindPopup(popup_72214dea35b595a4383cd98af5db94e6)
+        ;
+
+        
+    
+    
+            marker_ca2ac38af0ac4e3d2b4beca6a795f2d6.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 1379 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ca2ac38af0ac4e3d2b4beca6a795f2d6.setIcon(icon_c0d0df981f2d376467440e6e204a16d6);
+            
+    
+            var marker_6308d59bd9e60c53a3fd1f739681251f = L.marker(
+                [-12.057500000000001, -77.0575],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_50bbbf730980fbbf3e902dfd365a24cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_21528abb932db9d872cff7986c4dd3b2 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_db2f3d4e6c70fc7bd920a91c0821dfda = $(`<div id="html_db2f3d4e6c70fc7bd920a91c0821dfda" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             1325                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.06000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.06000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>1325                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_21528abb932db9d872cff7986c4dd3b2.setContent(html_db2f3d4e6c70fc7bd920a91c0821dfda);
+            
+        
+
+        marker_6308d59bd9e60c53a3fd1f739681251f.bindPopup(popup_21528abb932db9d872cff7986c4dd3b2)
+        ;
+
+        
+    
+    
+            marker_6308d59bd9e60c53a3fd1f739681251f.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 1325 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6308d59bd9e60c53a3fd1f739681251f.setIcon(icon_50bbbf730980fbbf3e902dfd365a24cc);
+            
+    
+            var marker_7617d95763472a5425ea6e8c828caca3 = L.marker(
+                [-12.027500000000002, -77.00750000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_63c53af1e12226f9986fc90ae1e6e482 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bef2c92d33b1404792c0f11201d48e19 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_832507ad2128131686479f8581f1031e = $(`<div id="html_832507ad2128131686479f8581f1031e" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             1176                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.03000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.01000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>1176                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_bef2c92d33b1404792c0f11201d48e19.setContent(html_832507ad2128131686479f8581f1031e);
+            
+        
+
+        marker_7617d95763472a5425ea6e8c828caca3.bindPopup(popup_bef2c92d33b1404792c0f11201d48e19)
+        ;
+
+        
+    
+    
+            marker_7617d95763472a5425ea6e8c828caca3.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 1176 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7617d95763472a5425ea6e8c828caca3.setIcon(icon_63c53af1e12226f9986fc90ae1e6e482);
+            
+    
+            var marker_2282bf00dffbed9463d2adda0903100a = L.marker(
+                [-12.0675, -77.0875],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_d0c5e0c096cc4bec5c75c9b916de22ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a197df834b2661503a1a247f373d1603 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_81e7a07727baa02d9f002d4dc7bc5b13 = $(`<div id="html_81e7a07727baa02d9f002d4dc7bc5b13" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             1133                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.07000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.09000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>1133                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_a197df834b2661503a1a247f373d1603.setContent(html_81e7a07727baa02d9f002d4dc7bc5b13);
+            
+        
+
+        marker_2282bf00dffbed9463d2adda0903100a.bindPopup(popup_a197df834b2661503a1a247f373d1603)
+        ;
+
+        
+    
+    
+            marker_2282bf00dffbed9463d2adda0903100a.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 1133 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2282bf00dffbed9463d2adda0903100a.setIcon(icon_d0c5e0c096cc4bec5c75c9b916de22ef);
+            
+    
+            var marker_8ad667cf979d50d2a3084d59cf9f2ddb = L.marker(
+                [-12.0875, -77.0025],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_f5e1b095f36e02c67eabaf3870836666 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_56eb0f501f216332989ce4ebfa8f1929 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9aefe739bec7f5e4c92be6da3066cfb5 = $(`<div id="html_9aefe739bec7f5e4c92be6da3066cfb5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: red; margin-bottom: 10px; border-bottom: 2px solid red; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MUY ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: red; font-weight: bold; font-size: 18px; padding: 5px;">                             1098                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: red; font-weight: bold;">MUY ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.09000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.00500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>1098                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_56eb0f501f216332989ce4ebfa8f1929.setContent(html_9aefe739bec7f5e4c92be6da3066cfb5);
+            
+        
+
+        marker_8ad667cf979d50d2a3084d59cf9f2ddb.bindPopup(popup_56eb0f501f216332989ce4ebfa8f1929)
+        ;
+
+        
+    
+    
+            marker_8ad667cf979d50d2a3084d59cf9f2ddb.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 1098 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8ad667cf979d50d2a3084d59cf9f2ddb.setIcon(icon_f5e1b095f36e02c67eabaf3870836666);
+            
+    
+            var marker_265125815ec484e7cd3dfd7fd5532099 = L.marker(
+                [-12.0425, -77.0775],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_ea9cf4b9442990ee59152e21e963182d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ac19670ef49f812223df931734d462fc = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_37eeec7eca0d88953100e819de3885bd = $(`<div id="html_37eeec7eca0d88953100e819de3885bd" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             871                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.04500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.08000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>871                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_ac19670ef49f812223df931734d462fc.setContent(html_37eeec7eca0d88953100e819de3885bd);
+            
+        
+
+        marker_265125815ec484e7cd3dfd7fd5532099.bindPopup(popup_ac19670ef49f812223df931734d462fc)
+        ;
+
+        
+    
+    
+            marker_265125815ec484e7cd3dfd7fd5532099.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 871 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_265125815ec484e7cd3dfd7fd5532099.setIcon(icon_ea9cf4b9442990ee59152e21e963182d);
+            
+    
+            var marker_9569135b331ecaedb2ab92483954b9c6 = L.marker(
+                [-12.0325, -77.0175],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_b527f705b427f07825365df77b633620 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_25794e8143e3ced2fd5a6589ab369565 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_991689af2cb954bab6154fb9e483e382 = $(`<div id="html_991689af2cb954bab6154fb9e483e382" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             863                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.03500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.02000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>863                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_25794e8143e3ced2fd5a6589ab369565.setContent(html_991689af2cb954bab6154fb9e483e382);
+            
+        
+
+        marker_9569135b331ecaedb2ab92483954b9c6.bindPopup(popup_25794e8143e3ced2fd5a6589ab369565)
+        ;
+
+        
+    
+    
+            marker_9569135b331ecaedb2ab92483954b9c6.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 863 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9569135b331ecaedb2ab92483954b9c6.setIcon(icon_b527f705b427f07825365df77b633620);
+            
+    
+            var marker_8680cb5f74484febb3fe0baed0186039 = L.marker(
+                [-12.117500000000001, -77.0025],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_37984e20639e483ce1d442796e21ede5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d741d5f8634a89ae4afea4e1a208795c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9cda5f62c23351203544c626744d80a5 = $(`<div id="html_9cda5f62c23351203544c626744d80a5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             731                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.12000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.00500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>731                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_d741d5f8634a89ae4afea4e1a208795c.setContent(html_9cda5f62c23351203544c626744d80a5);
+            
+        
+
+        marker_8680cb5f74484febb3fe0baed0186039.bindPopup(popup_d741d5f8634a89ae4afea4e1a208795c)
+        ;
+
+        
+    
+    
+            marker_8680cb5f74484febb3fe0baed0186039.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 731 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8680cb5f74484febb3fe0baed0186039.setIcon(icon_37984e20639e483ce1d442796e21ede5);
+            
+    
+            var marker_7952ceba863982a6709c25d634b456b3 = L.marker(
+                [-12.1875, -76.9975],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_b9789981a8d2c425061331aeb72b784d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f7a3a0e8a91f4e988c324032b4121f6 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f30d2bd043792996fb04c8e61dafc025 = $(`<div id="html_f30d2bd043792996fb04c8e61dafc025" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             685                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.19000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.00000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>685                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_9f7a3a0e8a91f4e988c324032b4121f6.setContent(html_f30d2bd043792996fb04c8e61dafc025);
+            
+        
+
+        marker_7952ceba863982a6709c25d634b456b3.bindPopup(popup_9f7a3a0e8a91f4e988c324032b4121f6)
+        ;
+
+        
+    
+    
+            marker_7952ceba863982a6709c25d634b456b3.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 685 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7952ceba863982a6709c25d634b456b3.setIcon(icon_b9789981a8d2c425061331aeb72b784d);
+            
+    
+            var marker_4a5bcec52cbe668a28c1b029281eea0e = L.marker(
+                [-12.057500000000001, -77.08250000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_9c6715b18d39e1bb8a664ba8ca361f55 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_800f14fbfb76d8d03458f43fffb21ce2 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b4daf0ac6d0c92001a1ddcf6b2a7928f = $(`<div id="html_b4daf0ac6d0c92001a1ddcf6b2a7928f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             651                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.06000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.08500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>651                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_800f14fbfb76d8d03458f43fffb21ce2.setContent(html_b4daf0ac6d0c92001a1ddcf6b2a7928f);
+            
+        
+
+        marker_4a5bcec52cbe668a28c1b029281eea0e.bindPopup(popup_800f14fbfb76d8d03458f43fffb21ce2)
+        ;
+
+        
+    
+    
+            marker_4a5bcec52cbe668a28c1b029281eea0e.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 651 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4a5bcec52cbe668a28c1b029281eea0e.setIcon(icon_9c6715b18d39e1bb8a664ba8ca361f55);
+            
+    
+            var marker_4d2088d1fcc955ab90125effe3efe1d3 = L.marker(
+                [-12.092500000000001, -77.0725],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_a101b0bdc22735177b9260d83eaf35a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_17942c8b9156cf4b4433cf05efe4bc93 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5c2e515b484d4820e82720c951e33156 = $(`<div id="html_5c2e515b484d4820e82720c951e33156" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             632                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.09500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.07500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>632                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_17942c8b9156cf4b4433cf05efe4bc93.setContent(html_5c2e515b484d4820e82720c951e33156);
+            
+        
+
+        marker_4d2088d1fcc955ab90125effe3efe1d3.bindPopup(popup_17942c8b9156cf4b4433cf05efe4bc93)
+        ;
+
+        
+    
+    
+            marker_4d2088d1fcc955ab90125effe3efe1d3.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 632 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4d2088d1fcc955ab90125effe3efe1d3.setIcon(icon_a101b0bdc22735177b9260d83eaf35a7);
+            
+    
+            var marker_a64b288be5afd80beb1c589ed7f28ca8 = L.marker(
+                [-12.102500000000001, -77.0475],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_5965384db0d9f4a8c8fc1971c0d8c2b7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bce4b2210991aa5955eabf5ef8b1c114 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4c4837d760fef4873cad0ae6c3a9c02a = $(`<div id="html_4c4837d760fef4873cad0ae6c3a9c02a" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             545                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.10500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.05000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>545                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_bce4b2210991aa5955eabf5ef8b1c114.setContent(html_4c4837d760fef4873cad0ae6c3a9c02a);
+            
+        
+
+        marker_a64b288be5afd80beb1c589ed7f28ca8.bindPopup(popup_bce4b2210991aa5955eabf5ef8b1c114)
+        ;
+
+        
+    
+    
+            marker_a64b288be5afd80beb1c589ed7f28ca8.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 545 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a64b288be5afd80beb1c589ed7f28ca8.setIcon(icon_5965384db0d9f4a8c8fc1971c0d8c2b7);
+            
+    
+            var marker_f6210cc6ac5f1ab26011066135c04ec8 = L.marker(
+                [-12.0675, -77.0725],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_9265608bd320d6d145b6d6a869cca734 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b86df15c5afa43e2f0ad96834d7a6d5c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0e5cf0f2d175641c069fcc584332ac36 = $(`<div id="html_0e5cf0f2d175641c069fcc584332ac36" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: orange; margin-bottom: 10px; border-bottom: 2px solid orange; padding-bottom: 5px;">                     🎯 Celda de Hotspot - ALTO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: orange; font-weight: bold; font-size: 18px; padding: 5px;">                             533                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: orange; font-weight: bold;">ALTO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.07000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.07500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>533                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_b86df15c5afa43e2f0ad96834d7a6d5c.setContent(html_0e5cf0f2d175641c069fcc584332ac36);
+            
+        
+
+        marker_f6210cc6ac5f1ab26011066135c04ec8.bindPopup(popup_b86df15c5afa43e2f0ad96834d7a6d5c)
+        ;
+
+        
+    
+    
+            marker_f6210cc6ac5f1ab26011066135c04ec8.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 533 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f6210cc6ac5f1ab26011066135c04ec8.setIcon(icon_9265608bd320d6d145b6d6a869cca734);
+            
+    
+            var marker_b3644e909930d18d8baf751af564ff74 = L.marker(
+                [-12.0875, -77.0425],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_bb332884ebeac39ccf6bcd9c7c2dd369 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1c3f36626240ef90c26b1d2c6ce3d6a4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_147725fff1544b66b03507f6967974e0 = $(`<div id="html_147725fff1544b66b03507f6967974e0" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             444                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.09000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.04500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>444                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_1c3f36626240ef90c26b1d2c6ce3d6a4.setContent(html_147725fff1544b66b03507f6967974e0);
+            
+        
+
+        marker_b3644e909930d18d8baf751af564ff74.bindPopup(popup_1c3f36626240ef90c26b1d2c6ce3d6a4)
+        ;
+
+        
+    
+    
+            marker_b3644e909930d18d8baf751af564ff74.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 444 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b3644e909930d18d8baf751af564ff74.setIcon(icon_bb332884ebeac39ccf6bcd9c7c2dd369);
+            
+    
+            var marker_934133e1e3bf37145a7a2bd0685b92bb = L.marker(
+                [-12.027500000000002, -77.0125],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_eb90c4ff535aafa56357cf17f9d0cb4d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a594e2043daa53085698000d8ddf8512 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_73f44ab69bbb83ead1bc72e3adca3d18 = $(`<div id="html_73f44ab69bbb83ead1bc72e3adca3d18" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             438                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.03000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.01500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>438                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_a594e2043daa53085698000d8ddf8512.setContent(html_73f44ab69bbb83ead1bc72e3adca3d18);
+            
+        
+
+        marker_934133e1e3bf37145a7a2bd0685b92bb.bindPopup(popup_a594e2043daa53085698000d8ddf8512)
+        ;
+
+        
+    
+    
+            marker_934133e1e3bf37145a7a2bd0685b92bb.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 438 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_934133e1e3bf37145a7a2bd0685b92bb.setIcon(icon_eb90c4ff535aafa56357cf17f9d0cb4d);
+            
+    
+            var marker_8f4057e305bc644d09446bfc06394f9e = L.marker(
+                [-12.182500000000001, -77.00750000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_21df6622aad6ba925914c6e03d097875 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5b6c7b2da1fc269b1e54703c315bd494 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e22c1281a03651f87495d2e1b828e951 = $(`<div id="html_e22c1281a03651f87495d2e1b828e951" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             433                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.18500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.01000</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>433                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_5b6c7b2da1fc269b1e54703c315bd494.setContent(html_e22c1281a03651f87495d2e1b828e951);
+            
+        
+
+        marker_8f4057e305bc644d09446bfc06394f9e.bindPopup(popup_5b6c7b2da1fc269b1e54703c315bd494)
+        ;
+
+        
+    
+    
+            marker_8f4057e305bc644d09446bfc06394f9e.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 433 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8f4057e305bc644d09446bfc06394f9e.setIcon(icon_21df6622aad6ba925914c6e03d097875);
+            
+    
+            var marker_2a6cc58609975ffad1e194e142097c64 = L.marker(
+                [-12.137500000000001, -77.02250000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_67c4970c93e63978ce0258281c41b231 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_32bd9e5f5cc60743da0d16f0468efb70 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6e63ac7abf87e081a41028a8ff5dbd48 = $(`<div id="html_6e63ac7abf87e081a41028a8ff5dbd48" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             374                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.14000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.02500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>374                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_32bd9e5f5cc60743da0d16f0468efb70.setContent(html_6e63ac7abf87e081a41028a8ff5dbd48);
+            
+        
+
+        marker_2a6cc58609975ffad1e194e142097c64.bindPopup(popup_32bd9e5f5cc60743da0d16f0468efb70)
+        ;
+
+        
+    
+    
+            marker_2a6cc58609975ffad1e194e142097c64.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 374 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2a6cc58609975ffad1e194e142097c64.setIcon(icon_67c4970c93e63978ce0258281c41b231);
+            
+    
+            var marker_89f857142471e190ce46fe52753d69d9 = L.marker(
+                [-12.027500000000002, -77.0325],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_ee77820f6563ce54ea30fa615c1c96ec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8f503fcebbea22073656100b306de9d0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_501ce3849670b927c82687568cb6997a = $(`<div id="html_501ce3849670b927c82687568cb6997a" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             336                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.03000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.03500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>336                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_8f503fcebbea22073656100b306de9d0.setContent(html_501ce3849670b927c82687568cb6997a);
+            
+        
+
+        marker_89f857142471e190ce46fe52753d69d9.bindPopup(popup_8f503fcebbea22073656100b306de9d0)
+        ;
+
+        
+    
+    
+            marker_89f857142471e190ce46fe52753d69d9.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 336 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_89f857142471e190ce46fe52753d69d9.setIcon(icon_ee77820f6563ce54ea30fa615c1c96ec);
+            
+    
+            var marker_72a15f47bc81f35df95b3cff45b4eb9a = L.marker(
+                [-12.1425, -77.02250000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_8f4441bdaac9d7b5b21e018b64abd1d2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1da1d01d7eceeeb209ef3451deb7989b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_97746b08e320c0f975c77d1b7b270898 = $(`<div id="html_97746b08e320c0f975c77d1b7b270898" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             332                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.14500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.02500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>332                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_1da1d01d7eceeeb209ef3451deb7989b.setContent(html_97746b08e320c0f975c77d1b7b270898);
+            
+        
+
+        marker_72a15f47bc81f35df95b3cff45b4eb9a.bindPopup(popup_1da1d01d7eceeeb209ef3451deb7989b)
+        ;
+
+        
+    
+    
+            marker_72a15f47bc81f35df95b3cff45b4eb9a.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 332 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_72a15f47bc81f35df95b3cff45b4eb9a.setIcon(icon_8f4441bdaac9d7b5b21e018b64abd1d2);
+            
+    
+            var marker_9d28eaa2fd5877cff4b9a299375c4b3f = L.marker(
+                [-12.1875, -77.0325],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_a847ccd4eca57c32a2c069f8bc5a6d37 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_98f39815a4bdf1b25b03ae5303540331 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_bbe8923faa84109fee12950b90ee2ea8 = $(`<div id="html_bbe8923faa84109fee12950b90ee2ea8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             248                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.19000</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.03500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>248                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_98f39815a4bdf1b25b03ae5303540331.setContent(html_bbe8923faa84109fee12950b90ee2ea8);
+            
+        
+
+        marker_9d28eaa2fd5877cff4b9a299375c4b3f.bindPopup(popup_98f39815a4bdf1b25b03ae5303540331)
+        ;
+
+        
+    
+    
+            marker_9d28eaa2fd5877cff4b9a299375c4b3f.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 248 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9d28eaa2fd5877cff4b9a299375c4b3f.setIcon(icon_a847ccd4eca57c32a2c069f8bc5a6d37);
+            
+    
+            var marker_7f737ead7d440b11e386676972b67344 = L.marker(
+                [-12.0225, -77.08250000000001],
+                {
+}
+            ).addTo(feature_group_3b2cae87adda37fa9bf6c12f41440672);
+        
+    
+            var icon_caeca025df81d7b2ce872afb275a07d8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_489ce6352a353ab3a433c09d392df314 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f064336c908bd0e121697738d54ada8c = $(`<div id="html_f064336c908bd0e121697738d54ada8c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="color: blue; margin-bottom: 10px; border-bottom: 2px solid blue; padding-bottom: 5px;">                     🎯 Celda de Hotspot - MODERADO                 </h4>                  <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">                     <p style="margin: 5px 0; font-size: 13px;">                         <b>💡 Qué representa:</b><br>                         Esta celda es un área de <b>~555m × 555m</b> donde se concentran crímenes.                     </p>                 </div>                  <table style="width: 100%; font-size: 13px;">                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Delito:</b></td>                         <td style="padding: 5px;">EXTORSION</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Total Crímenes:</b></td>                         <td style="color: blue; font-weight: bold; font-size: 18px; padding: 5px;">                             245                         </td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Nivel Riesgo:</b></td>                         <td style="padding: 5px; color: blue; font-weight: bold;">MODERADO</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Tamaño Celda:</b></td>                         <td style="padding: 5px;">~555m × 555m</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Centro (lat):</b></td>                         <td style="padding: 5px; font-family: monospace;">-12.02500</td>                     </tr>                     <tr>                         <td style="padding: 5px;"><b>Centro (long):</b></td>                         <td style="padding: 5px; font-family: monospace;">-77.08500</td>                     </tr>                     <tr style="background: #e8f4f8;">                         <td style="padding: 5px;"><b>Zona:</b></td>                         <td style="padding: 5px;">Lima Oeste/Costa</td>                     </tr>                 </table>                  <div style="background: #fffbcc; padding: 8px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">                     <p style="font-size: 11px; margin: 0;">                         <b>📊 Interpretación:</b> En esta área de ~307,000 m²                         (3 cuadras × 3 cuadras aprox.) ocurrieron <b>245                         extorsions</b> durante el período test (2024-2025).                     </p>                 </div>                  <p style="font-size: 10px; color: gray; margin-top: 10px; text-align: center;">                     ⏱️ Período: 2024-2025 (Test) | 📍 Grid: 0.005°                 </p>             </div>             </div>`)[0];
+                popup_489ce6352a353ab3a433c09d392df314.setContent(html_f064336c908bd0e121697738d54ada8c);
+            
+        
+
+        marker_7f737ead7d440b11e386676972b67344.bindPopup(popup_489ce6352a353ab3a433c09d392df314)
+        ;
+
+        
+    
+    
+            marker_7f737ead7d440b11e386676972b67344.bindTooltip(
+                `<div>
+                     📍 EXTORSION: 245 crímenes en ~555m²
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7f737ead7d440b11e386676972b67344.setIcon(icon_caeca025df81d7b2ce872afb275a07d8);
+            
+    
+            feature_group_3b2cae87adda37fa9bf6c12f41440672.addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+        
+    
+            var layer_control_f568f0460da4888634f933bebdde697c_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_db1934bdc1663a9b68e307fa553a0c38,
+                    "CartoDB Positron" : tile_layer_68d6b779075263474fcd7854992ac24a,
+                    "CartoDB Dark" : tile_layer_a4b7ac0dd6f3701a8b191ca9bb75adcf,
+                },
+                overlays :  {
+                    "Mapa de Calor" : heat_map_b36bb8d8abb92cba45d382fdfe1bdfaf,
+                    "\ud83d\udfe6 \u00c1reas de Grid (~555m)" : feature_group_73650c2332dad4aa7d75b08c541326e5,
+                    "\ud83d\udccd Marcadores Hotspots" : feature_group_3b2cae87adda37fa9bf6c12f41440672,
+                },
+            };
+            let layer_control_f568f0460da4888634f933bebdde697c = L.control.layers(
+                layer_control_f568f0460da4888634f933bebdde697c_layers.base_layers,
+                layer_control_f568f0460da4888634f933bebdde697c_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_fdd10b4db73478d971d850a7fd68bee7);
+
+        
+</script>
+</html>

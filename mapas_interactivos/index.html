@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapas Interactivos - Hotspots Criminales Lima</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2em; opacity: 0.9; }
+        .content { padding: 40px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid #ddd;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .card h3 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .section-title {
+            background: #2a5298;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            font-size: 1.5em;
+        }
+        .info {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        footer {
+            background: #2a5298;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🗺️ Mapas Interactivos de Criminalidad</h1>
+            <p class="subtitle">Lima Metropolitana - HURTO y EXTORSIÓN (2024-2025)</p>
+        </header>
+
+        <div class="content">
+            <div class="info">
+                <h3>ℹ️ Características de los Mapas:</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><b>Interactivos:</b> Zoom, arrastre, click en marcadores</li>
+                    <li><b>Heatmap:</b> Visualización de densidad criminal</li>
+                    <li><b>Marcadores agrupados:</b> Clusters automáticos</li>
+                    <li><b>Múltiples capas:</b> OpenStreetMap, CartoDB</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">📍 HURTO - Mapas por Zona</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🗺️ Lima Completa</h3>
+                    <a href="mapa_hurto_completo.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🔵 Lima Norte</h3>
+                    <a href="mapa_hurto_norte.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🟢 Lima Centro</h3>
+                    <a href="mapa_hurto_centro.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🔴 Lima Sur</h3>
+                    <a href="mapa_hurto_sur.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🟡 Lima Este</h3>
+                    <a href="mapa_hurto_este.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🟣 Lima Oeste</h3>
+                    <a href="mapa_hurto_oeste.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+            </div>
+
+            <h2 class="section-title">💰 EXTORSIÓN - Mapas por Zona</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🗺️ Lima Completa</h3>
+                    <a href="mapa_extorsion_completo.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🔵 Lima Norte</h3>
+                    <a href="mapa_extorsion_norte.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🟢 Lima Centro</h3>
+                    <a href="mapa_extorsion_centro.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🔴 Lima Sur</h3>
+                    <a href="mapa_extorsion_sur.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🟡 Lima Este</h3>
+                    <a href="mapa_extorsion_este.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+                <div class="card">
+                    <h3>🟣 Lima Oeste</h3>
+                    <a href="mapa_extorsion_oeste.html" class="btn" target="_blank">Ver Mapa</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Universidad Nacional de Ingeniería - FIIS</strong></p>
+            <p>PC3 - Analítica de Datos | Grupo 2 - Capítulo 3: Classification</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Mapas generados con Folium + OpenStreetMap</p>
+        </footer>
+    </div>
+</body>
+</html>
+    

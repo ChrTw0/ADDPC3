@@ -1,0 +1,257 @@
+================================================================================
+PAPERS A BUSCAR PARA ESTADO DEL ARTE - PC3 GRUPO 2
+================================================================================
+
+INSTRUCCIONES PARA EL COMPAÑERO:
+Buscar en Google Scholar, IEEE Xplore, Springer, ScienceDirect
+Necesitamos mínimo 10 papers (actualmente tenemos 3 reales, 10 simulados)
+Formato: PDF descargable o DOI para referencia
+
+================================================================================
+CATEGORÍA 1: ALGORITMOS DE CLASIFICACIÓN (Cap 3)
+================================================================================
+
+📌 BÚSQUEDA 1: Gradient Boosting
+Títulos sugeridos:
+- "Gradient Boosting Machines: A Tutorial"
+- "XGBoost: A Scalable Tree Boosting System"
+- "Greedy Function Approximation: A Gradient Boosting Machine"
+- "LightGBM: A Highly Efficient Gradient Boosting Decision Tree"
+
+Keywords: "gradient boosting classification", "ensemble methods", "boosting algorithms"
+
+Qué buscar: Paper que explique fundamentos teóricos de Gradient Boosting
+
+
+📌 BÚSQUEDA 2: Random Forest
+Títulos sugeridos:
+- "Random Forests" (Breiman, 2001) ← CLÁSICO
+- "Random Forest for Classification in Ecology"
+- "Understanding Random Forests: From Theory to Practice"
+
+Keywords: "random forest classification", "bagging ensemble", "decision trees ensemble"
+
+Qué buscar: Paper original de Breiman o revisión moderna
+
+
+📌 BÚSQUEDA 3: Logistic Regression
+Títulos sugeridos:
+- "Logistic Regression: A Self-learning Text"
+- "Applied Logistic Regression" (Hosmer & Lemeshow)
+- "Binary Logistic Regression"
+
+Keywords: "logistic regression classification", "binary classification methods"
+
+
+📌 BÚSQUEDA 4: SGD Classifier
+Títulos sugeridos:
+- "Stochastic Gradient Descent Tricks"
+- "Large-Scale Machine Learning with Stochastic Gradient Descent"
+- "SGD: General Analysis and Improved Rates"
+
+Keywords: "stochastic gradient descent", "online learning", "SGD classification"
+
+
+📌 BÚSQUEDA 5: K-Nearest Neighbors
+Títulos sugeridos:
+- "Nearest Neighbor Pattern Classification" (Cover & Hart, 1967) ← CLÁSICO
+- "k-Nearest Neighbor Classification"
+
+Keywords: "k-nearest neighbors", "KNN classification", "instance-based learning"
+
+
+================================================================================
+CATEGORÍA 2: PREDICCIÓN CRIMINAL Y HOTSPOTS
+================================================================================
+
+📌 BÚSQUEDA 6: Crime Prediction con Machine Learning
+Títulos sugeridos:
+- "Crime Forecasting Using Machine Learning: A Systematic Literature Review"
+- "Machine Learning for Crime Prediction: A Systematic Review"
+- "Predicting Crime Using Twitter and Kernel Density Estimation"
+- "Deep Learning Approaches for Crime Prediction"
+
+Keywords: "crime prediction machine learning", "criminal forecasting", "predictive policing"
+
+Qué buscar: Papers recientes (2018-2024) que usen ML para predecir crímenes
+
+
+📌 BÚSQUEDA 7: Hotspot Analysis
+Títulos sugeridos:
+- "Mapping Crime: Understanding Hot Spots" (Eck et al.) ← CLÁSICO
+- "The Utility of Hotspot Mapping for Predicting Spatial Patterns of Crime"
+- "Crime Hotspot Detection Using Statistical and Network Kernel Density Estimation"
+- "Spatio-temporal Crime Hotspot Detection and Evaluation"
+
+Keywords: "crime hotspots", "spatial crime analysis", "hotspot mapping"
+
+Qué buscar: Papers sobre teoría de hotspots y análisis espacial del crimen
+
+
+📌 BÚSQUEDA 8: Self-Exciting Point Processes (opcional avanzado)
+Títulos sugeridos:
+- "Self-Exciting Point Process Modeling of Crime" (Mohler et al., 2011)
+- "Predictive Policing with Self-Exciting Point Processes"
+
+Keywords: "self-exciting point process crime", "Hawkes process crime"
+
+Qué buscar: Papers que usen modelos matemáticos avanzados para predecir crimen
+
+
+================================================================================
+CATEGORÍA 3: LATINOAMÉRICA Y PERÚ
+================================================================================
+
+📌 BÚSQUEDA 9: Crime en Latinoamérica
+Títulos sugeridos:
+- "Crime Prediction in Latin American Cities using Machine Learning"
+- "Spatio-temporal Crime Predictions in Smart Cities: Data-driven Approach"
+- "Urban Crime Analysis in Developing Countries"
+- "Machine Learning for Crime Prevention in Mexico City"
+
+Keywords: "crime prediction Latin America", "urban crime developing countries", "crime forecasting Mexico/Brazil/Colombia"
+
+Qué buscar: Papers sobre predicción criminal en contexto latinoamericano
+
+
+📌 BÚSQUEDA 10: Perú / Lima
+Títulos sugeridos:
+- "Análisis Espacial de la Criminalidad en Lima Metropolitana"
+- "Spatial Analysis of Crime in Lima, Peru"
+- "Seguridad Ciudadana en Lima: Análisis Espacial"
+
+Keywords: "crime Lima Peru", "spatial crime analysis Peru", "seguridad ciudadana Lima"
+
+Qué buscar: Cualquier paper sobre criminalidad en Lima/Perú (probablemente escasos)
+
+
+================================================================================
+CATEGORÍA 4: MÉTRICAS Y EVALUACIÓN (Datos Desbalanceados)
+================================================================================
+
+📌 BÚSQUEDA 11: Imbalanced Classification
+Títulos sugeridos:
+- "Learning from Imbalanced Data" (He & Garcia, 2009) ← IMPORTANTE
+- "SMOTE: Synthetic Minority Over-sampling Technique"
+- "A Survey of Predictive Modeling Under Imbalanced Distributions"
+- "Cost-Sensitive Learning and the Class Imbalance Problem"
+
+Keywords: "imbalanced classification", "class imbalance", "SMOTE"
+
+Qué buscar: Papers sobre cómo manejar datasets desbalanceados (95% Normal, 5% Crítico)
+
+
+📌 BÚSQUEDA 12: Precision-Recall vs Accuracy
+Títulos sugeridos:
+- "The Relationship Between Precision-Recall and ROC Curves"
+- "Performance Metrics for Classification: Beyond Accuracy"
+
+Keywords: "precision recall F1-score", "classification metrics", "ROC AUC"
+
+
+================================================================================
+CATEGORÍA 5: COMPARACIÓN DE ALGORITMOS (Meta-análisis)
+================================================================================
+
+📌 BÚSQUEDA 13: Comparative Studies
+Títulos sugeridos:
+- "A Comparative Study of Machine Learning Algorithms for Classification"
+- "An Empirical Comparison of Supervised Learning Algorithms"
+- "Do We Need Hundreds of Classifiers to Solve Real World Classification Problems?"
+
+Keywords: "comparison classification algorithms", "ensemble methods comparison", "algorithm benchmarking"
+
+Qué buscar: Papers que comparen múltiples algoritmos (como nuestro estudio de 7 algoritmos)
+
+
+================================================================================
+PAPERS YA INCLUIDOS (NO BUSCAR, SOLO PARA REFERENCIA)   (ESTO FUE GENERADO POR IA VERIFIQUEN)
+================================================================================
+
+[6] A. Géron, Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow,
+    2nd ed. Sebastopol, CA: O'Reilly Media, 2019, ch. 3.
+    ✓ YA LO TENEMOS (libro del curso)
+
+[3] J. E. Eck, S. Chainey, J. G. Cameron, M. Leitner, and R. E. Wilson,
+    Mapping Crime: Understanding Hot Spots. Washington, DC: National Institute of Justice, 2005.
+    ✓ Clásico sobre hotspots (intentar conseguir)
+
+[10] H. He and E. A. Garcia, "Learning from imbalanced data," IEEE Trans. Knowledge Data Eng.,
+     vol. 21, no. 9, pp. 1263-1284, 2009.
+     ✓ Clásico sobre datos desbalanceados
+
+================================================================================
+FORMATO DE ENTREGA
+================================================================================
+
+Para cada paper encontrado, proporcionar:
+
+1. Título completo
+2. Autores
+3. Año de publicación
+4. Revista/Conferencia
+5. DOI o URL
+6. PDF descargado (si es posible)
+7. Resumen breve (2-3 líneas de por qué es relevante)
+
+EJEMPLO:
+-------------------------
+[Título] "Random Forests"
+[Autores] L. Breiman
+[Año] 2001
+[Revista] Machine Learning, vol. 45, no. 1, pp. 5-32
+[DOI] 10.1023/A:1010933404324
+[Relevancia] Paper original que introduce Random Forest, base teórica para
+             uno de nuestros 7 algoritmos implementados.
+-------------------------
+
+================================================================================
+PRIORIDAD DE BÚSQUEDA
+================================================================================
+
+🔴 ALTA PRIORIDAD (buscar primero):
+- BÚSQUEDA 6: Crime Prediction con ML (necesitamos 2-3 papers)
+- BÚSQUEDA 7: Hotspot Analysis (necesitamos 1-2 papers)
+- BÚSQUEDA 1: Gradient Boosting (necesitamos 1 paper teórico)
+- BÚSQUEDA 2: Random Forest (paper original de Breiman si es posible)
+
+🟡 MEDIA PRIORIDAD:
+- BÚSQUEDA 9: Crime en Latinoamérica
+- BÚSQUEDA 11: Imbalanced Classification
+- BÚSQUEDA 13: Comparative Studies
+
+🟢 BAJA PRIORIDAD (solo si hay tiempo):
+- BÚSQUEDA 10: Perú/Lima (probablemente escasos)
+- BÚSQUEDA 3, 4, 5: Algoritmos individuales restantes
+- BÚSQUEDA 8: Self-Exciting Processes (muy avanzado)
+
+================================================================================
+RECURSOS RECOMENDADOS
+================================================================================
+
+🔍 Buscadores:
+- Google Scholar: https://scholar.google.com/
+- IEEE Xplore: https://ieeexplore.ieee.org/
+- Springer: https://link.springer.com/
+- ScienceDirect: https://www.sciencedirect.com/
+- arXiv: https://arxiv.org/ (pre-prints)
+
+📚 Acceso UNI:
+- Verificar si UNI tiene suscripción a IEEE, Springer, Elsevier
+- Usar VPN de UNI si es necesario
+
+🆓 Acceso abierto:
+- Sci-Hub (último recurso, uso académico)
+- ResearchGate (autores suben sus papers)
+
+================================================================================
+NOTAS FINALES
+================================================================================
+
+- Objetivo: Mínimo 10 papers REALES (actualmente tenemos ~3)
+- Calidad > Cantidad
+- Preferir papers recientes (2015-2024) para crime prediction
+- Preferir papers clásicos (pre-2010) para fundamentos de algoritmos
+- Si un paper está detrás de paywall, buscar versión en ResearchGate o arXiv
+
+¡MUCHA SUERTE EN LA BÚSQUEDA! 🔍📚
