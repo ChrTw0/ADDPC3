@@ -11,6 +11,11 @@ Modelos implementados:
 Total: 7 × 3 × 2 = 42 modelos de clasificación
 """
 
+import sys
+from pathlib import Path
+# Agregar raíz del proyecto al path para imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import warnings
 warnings.filterwarnings('ignore')
 

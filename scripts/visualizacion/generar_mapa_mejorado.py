@@ -3,10 +3,14 @@ Genera mapa mejorado de hotspots con contexto geográfico de Lima
 Incluye: mapa base de calles, distritos, y hotspots criminales
 """
 
+import sys
+from pathlib import Path
+# Agregar raíz del proyecto al path para imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-from pathlib import Path
 import warnings
 warnings.filterwarnings('ignore')
 

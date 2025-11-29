@@ -12,6 +12,11 @@ Gráficos adicionales:
 6. Evolución Mensual de Delitos
 """
 
+import sys
+from pathlib import Path
+# Agregar raíz del proyecto al path para imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
 import warnings
 warnings.filterwarnings('ignore')
 

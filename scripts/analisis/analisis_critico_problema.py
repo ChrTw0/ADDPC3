@@ -14,6 +14,10 @@ PREGUNTAS CRÍTICAS:
 
 import os
 import sys
+from pathlib import Path
+# Agregar raíz del proyecto al path para imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
