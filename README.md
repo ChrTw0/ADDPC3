@@ -274,7 +274,7 @@ El proyecto sigue una **arquitectura modular** que separa responsabilidades:
 **Grupo 2 - PC3**
 - Universidad Nacional de Ingeniería
 - Facultad de Ingeniería Industrial y de Sistemas
-- Curso: Machine Learning / Aprendizaje Automático
+- Curso: Analitica de Datos
 
 ---
 
